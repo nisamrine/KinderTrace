@@ -19,7 +19,7 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onLogin }) => {
           <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-teal-400 rounded-full border-4 border-white animate-pulse"></div>
         </div>
         <h2 className="text-3xl font-black text-slate-800 mb-1 tracking-tight">KinderTrace</h2>
-        <p className="text-slate-500 text-sm mb-8 text-center font-bold">Secure Staff Portal</p>
+        <p className="text-slate-500 text-sm mb-8 text-center font-bold">Secure Daycare Staff Portal</p>
 
         <div className="w-full space-y-4">
           <div className="relative">
