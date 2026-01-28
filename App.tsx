@@ -16,13 +16,13 @@ const App: React.FC = () => {
       case 'auth':
         return <AuthScreen onLogin={() => setCurrentScreen('observations')} />;
       case 'observations':
-        return <ObservationScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} />;
+        return <ObservationScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
       case 'dashboard':
-        return <DashboardScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} />;
+        return <DashboardScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
       case 'storybook':
-        return <MagicScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} />;
+        return <MagicScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
       default:
-        return <ObservationScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} />;
+        return <ObservationScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
     }
   };
 

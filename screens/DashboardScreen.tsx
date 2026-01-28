@@ -5,17 +5,18 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid 
 } from 'recharts';
 import { 
-  Activity, Smile, TrendingUp, Moon, Brain, FileText, User
+  Activity, Smile, TrendingUp, Moon, Brain, FileText, User, ChevronRight, BookHeart
 } from 'lucide-react';
-import { Child } from '../types';
+import { Child, Screen } from '../types';
 import ChildSelector from '../components/ChildSelector';
 
 interface DashboardScreenProps {
   selectedChild: Child | null;
   setSelectedChild: (child: Child) => void;
+  onNavigate: (screen: Screen) => void;
 }
 
-const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSelectedChild }) => {
+const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSelectedChild, onNavigate }) => {
   const [reportType, setReportType] = useState<'weekly' | 'monthly'>('weekly');
 
   const sleepData = [
@@ -249,6 +250,20 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
               </div>
             </div>
           </section>
+
+          {/* NEXT SECTION NAV BUTTON */}
+          <div className="flex justify-center pt-8">
+            <button
+              onClick={() => onNavigate('storybook')}
+              className="group relative flex items-center space-x-4 bg-white/80 backdrop-blur-sm border-2 border-purple-200 px-12 py-5 rounded-[2rem] text-purple-600 font-black text-xl hover:bg-purple-50 hover:border-purple-400 transition-all shadow-xl shadow-purple-100/50"
+            >
+              <div className="bg-purple-100 p-2 rounded-xl group-hover:scale-110 transition-transform">
+                <BookHeart size={24} />
+              </div>
+              <span>Build Daily Storybook</span>
+              <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform" />
+            </button>
+          </div>
         </>
       ) : (
         <div className="h-96 flex flex-col items-center justify-center text-slate-300 space-y-6 animate-pulse">

@@ -1,16 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Share2, RefreshCw, Heart, BookOpen, Quote, ChevronLeft, ChevronRight, Calendar, User } from 'lucide-react';
+import { Sparkles, Share2, RefreshCw, Heart, BookOpen, Quote, ChevronLeft, ChevronRight, Calendar, User, ClipboardList, FileText, Download } from 'lucide-react';
 import { generateMonthlyStorybook, generateStoryImage } from '../services/geminiService';
-import { StoryPage, Child } from '../types';
+import { StoryPage, Child, Screen } from '../types';
 import ChildSelector from '../components/ChildSelector';
 
 interface StorybookScreenProps {
   selectedChild: Child | null;
   setSelectedChild: (child: Child) => void;
+  onNavigate: (screen: Screen) => void;
 }
 
-const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSelectedChild }) => {
+const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSelectedChild, onNavigate }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pages, setPages] = useState<StoryPage[]>([]);
   const [selectedMonth, setSelectedMonth] = useState('March');
@@ -66,7 +67,6 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
     }
   }, [pages, isGenerating]);
 
-  // Reset pages when child changes
   useEffect(() => {
     setPages([]);
     setCurrentPage(0);
@@ -203,12 +203,26 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
 
               <div className="flex flex-col md:flex-row gap-6">
                 <button className="flex-1 flex items-center justify-center space-x-4 py-6 bg-white hover:bg-indigo-50 border-2 border-indigo-50 rounded-[2.5rem] transition-all group shadow-sm text-slate-700">
-                  <BookOpen className="group-hover:scale-110 transition-transform text-indigo-500" size={24} />
+                  <Download className="group-hover:scale-110 transition-transform text-indigo-500" size={24} />
                   <span className="text-lg font-black">Download PDF Book</span>
                 </button>
                 <button className="flex-1 flex items-center justify-center space-x-4 py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[2.5rem] shadow-2xl shadow-indigo-100 transition-all transform hover:-translate-y-1 active:scale-95 group">
                   <Share2 className="text-white group-hover:rotate-12 transition-transform" size={24} />
                   <span className="text-lg font-black">Share Full Month Story</span>
+                </button>
+              </div>
+
+              {/* NEXT SECTION NAV BUTTON (Back to Start) */}
+              <div className="flex justify-center pt-8">
+                <button
+                  onClick={() => onNavigate('observations')}
+                  className="group relative flex items-center space-x-4 bg-white/80 backdrop-blur-sm border-2 border-blue-200 px-12 py-5 rounded-[2rem] text-blue-600 font-black text-xl hover:bg-blue-50 hover:border-blue-400 transition-all shadow-xl shadow-blue-100/50"
+                >
+                  <div className="bg-blue-100 p-2 rounded-xl group-hover:scale-110 transition-transform">
+                    <ClipboardList size={24} />
+                  </div>
+                  <span>Start New Observation</span>
+                  <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform" />
                 </button>
               </div>
             </div>
@@ -221,12 +235,15 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                  <h3 className="text-2xl font-black text-slate-800">No Storybook Found</h3>
                  <p className="text-slate-500 font-bold">Select a month above and let Gemini 3 Pro weave some magic for {selectedChild.name}!</p>
                </div>
-               <button 
-                onClick={handleGenerate}
-                className="mt-4 px-10 py-4 bg-indigo-600 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 hover:scale-105 transition-all"
-               >
-                Generate {selectedMonth} Book
-               </button>
+               
+               <div className="space-y-8 w-full max-w-sm">
+                 <button 
+                  onClick={handleGenerate}
+                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 hover:scale-105 transition-all"
+                 >
+                  Generate {selectedMonth} Book
+                 </button>
+               </div>
             </div>
           )}
         </>
