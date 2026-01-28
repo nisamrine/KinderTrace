@@ -1,0 +1,8 @@
+{
+  "name": "KinderTrace",
+  "description": "Professional pedagogical documentation and playful memory-making for daycare centers.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}
