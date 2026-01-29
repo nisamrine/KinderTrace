@@ -243,6 +243,15 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                  >
                   Generate {selectedMonth} Book
                  </button>
+
+                 {/* EXPORT TO PDF FIELD (NEW - Based on mockup) */}
+                 <div className="relative group">
+                   <div className="absolute inset-0 bg-indigo-50 rounded-2xl border-2 border-dashed border-indigo-200 group-hover:border-indigo-400 transition-colors" />
+                   <button className="relative w-full py-6 flex flex-col items-center justify-center space-y-2 text-indigo-400 group-hover:text-indigo-600 transition-colors">
+                     <FileText size={24} />
+                     <span className="text-xs font-black uppercase tracking-[0.2em]">Export to PDF field</span>
+                   </button>
+                 </div>
                </div>
             </div>
           )}

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { 
   Mic, BookOpen, User, Loader2, Info, Clock, Moon, Smile, ChevronDown, Database, 
-  Palette, Plus, ChevronRight, TrendingUp, Edit3
+  Palette, Plus, ChevronRight, TrendingUp, Edit3, CheckCircle2
 } from 'lucide-react';
 import { Child, Screen } from '../types';
 import ChildSelector from '../components/ChildSelector';
@@ -36,6 +36,14 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
     } else {
       setIsRecording(true);
     }
+  };
+
+  const handleSubmitVoiceEntry = () => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setDictatedText('');
+    }, 1500);
   };
 
   const toggleTag = (tag: string, list: string[], setter: (val: string[]) => void) => {
@@ -279,8 +287,8 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
 
           {/* TRANSCRIPTION RESULT FIELD (As per mockup) */}
           {dictatedText && (
-            <div className="bg-white/90 backdrop-blur rounded-[2.5rem] p-8 border-2 border-dashed border-blue-200 animate-in slide-in-from-bottom-4 duration-500">
-              <div className="flex items-center justify-between mb-4">
+            <div className="bg-white/90 backdrop-blur rounded-[2.5rem] p-8 border-2 border-dashed border-blue-200 animate-in slide-in-from-bottom-4 duration-500 space-y-6">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3 text-blue-600">
                   <Edit3 size={18} />
                   <span className="text-xs font-black uppercase tracking-widest">Dictated Text Review</span>
@@ -298,7 +306,17 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
                 className="w-full bg-blue-50/30 border-none rounded-2xl p-4 text-slate-700 font-bold text-sm leading-relaxed outline-none focus:ring-2 focus:ring-blue-100 min-h-[120px] resize-none"
                 placeholder="Transcribed text will appear here..."
               />
-              <p className="mt-4 text-[10px] font-black text-blue-300 uppercase tracking-widest text-center">
+              
+              {/* SUBMIT BUTTON (NEW - Based on mockup) */}
+              <button
+                onClick={handleSubmitVoiceEntry}
+                className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-black shadow-xl shadow-blue-100 flex items-center justify-center space-x-3 transform transition-all active:scale-95 hover:shadow-2xl hover:-translate-y-0.5"
+              >
+                <CheckCircle2 size={20} />
+                <span>Submit Observation</span>
+              </button>
+
+              <p className="text-[10px] font-black text-blue-300 uppercase tracking-widest text-center">
                 Tap the text above to edit if needed
               </p>
             </div>
