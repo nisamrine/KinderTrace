@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { 
   Mic, BookOpen, User, Loader2, Info, Clock, Moon, Smile, ChevronDown, Database, 
-  Palette, Plus, ChevronRight, TrendingUp
+  Palette, Plus, ChevronRight, TrendingUp, Edit3
 } from 'lucide-react';
 import { Child, Screen } from '../types';
 import ChildSelector from '../components/ChildSelector';
@@ -17,6 +17,7 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showLogbook, setShowLogbook] = useState(false);
+  const [dictatedText, setDictatedText] = useState('');
   
   const [activeBehaviorTags, setActiveBehaviorTags] = useState<string[]>(['Happy']);
   const [activeActivityTags, setActiveActivityTags] = useState<string[]>(['Paint']);
@@ -27,7 +28,11 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
     if (isRecording) {
       setIsRecording(false);
       setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
+      // Simulate transcription result
+      setTimeout(() => {
+        setIsProcessing(false);
+        setDictatedText(`${selectedChild?.name} had a wonderful morning. They played with the wooden blocks for 20 minutes and showed great interest in the new picture book about animals.`);
+      }, 2000);
     } else {
       setIsRecording(true);
     }
@@ -271,6 +276,33 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
               )}
             </div>
           </div>
+
+          {/* TRANSCRIPTION RESULT FIELD (As per mockup) */}
+          {dictatedText && (
+            <div className="bg-white/90 backdrop-blur rounded-[2.5rem] p-8 border-2 border-dashed border-blue-200 animate-in slide-in-from-bottom-4 duration-500">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3 text-blue-600">
+                  <Edit3 size={18} />
+                  <span className="text-xs font-black uppercase tracking-widest">Dictated Text Review</span>
+                </div>
+                <button 
+                  onClick={() => setDictatedText('')}
+                  className="text-xs font-black text-slate-300 hover:text-slate-500 uppercase"
+                >
+                  Clear
+                </button>
+              </div>
+              <textarea
+                value={dictatedText}
+                onChange={(e) => setDictatedText(e.target.value)}
+                className="w-full bg-blue-50/30 border-none rounded-2xl p-4 text-slate-700 font-bold text-sm leading-relaxed outline-none focus:ring-2 focus:ring-blue-100 min-h-[120px] resize-none"
+                placeholder="Transcribed text will appear here..."
+              />
+              <p className="mt-4 text-[10px] font-black text-blue-300 uppercase tracking-widest text-center">
+                Tap the text above to edit if needed
+              </p>
+            </div>
+          )}
 
           {/* NEXT SECTION NAV BUTTON */}
           <div className="flex justify-center pt-8">

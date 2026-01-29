@@ -5,7 +5,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid 
 } from 'recharts';
 import { 
-  Activity, Smile, TrendingUp, Moon, Brain, FileText, User, ChevronRight, BookHeart
+  Activity, Smile, TrendingUp, Moon, Brain, FileText, User, ChevronRight, BookHeart, History
 } from 'lucide-react';
 import { Child, Screen } from '../types';
 import ChildSelector from '../components/ChildSelector';
@@ -93,7 +93,7 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
 
           {/* Insights Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
+            {/* Sleep, Mood, Physical Health Cards... */}
             {/* Sleep Quality Card */}
             <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-50 flex flex-col items-center">
               <div className="w-full flex items-center space-x-4 mb-8">
@@ -248,6 +248,28 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
                   Appetite remains strong and consistent. The child shows healthy eating patterns with a preference for fruits and proteins. Continue offering variety to support balanced nutrition.
                 </p>
               </div>
+            </div>
+          </section>
+
+          {/* SYNTHESIS SECTION (As per mockup) */}
+          <section className="bg-white/90 backdrop-blur rounded-[2.5rem] p-10 border-2 border-dashed border-indigo-200 space-y-6 animate-in fade-in duration-700">
+            <div className="flex items-center space-x-4 text-indigo-600">
+              <div className="bg-indigo-50 p-3 rounded-2xl">
+                <History size={24} />
+              </div>
+              <div>
+                <h3 className="text-lg font-black">{reportType === 'weekly' ? 'Weekly' : 'Monthly'} Synthesis</h3>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">A birds-eye view of {selectedChild.name}'s progress</p>
+              </div>
+            </div>
+            
+            <div className="bg-indigo-50/20 rounded-3xl p-8 border border-indigo-50">
+              <p className="text-slate-600 font-bold leading-relaxed text-sm">
+                Overall, {selectedChild.name} has had a remarkably consistent {reportType === 'weekly' ? 'week' : 'month'}. 
+                The core focus remains on social integration, where we've seen a {reportType === 'weekly' ? '15%' : '25%'} increase in self-initiated peer play. 
+                Physical energy levels have peaked during mid-morning activity sessions, and their nutritional intake has exceeded average baselines for the period.
+                The transition into nap time has become significantly smoother, indicating growing comfort and environmental trust.
+              </p>
             </div>
           </section>
 
