@@ -2,13 +2,16 @@
 import React, { useState } from 'react';
 import { 
   RadialBarChart, RadialBar, ResponsiveContainer, 
-  LineChart, Line, XAxis, YAxis, CartesianGrid 
+  LineChart, Line, XAxis, YAxis, CartesianGrid,
+  BarChart, Bar, Cell
 } from 'recharts';
 import { 
-  Activity, Smile, TrendingUp, Moon, Brain, FileText, User, ChevronRight, BookHeart, History
+  Activity, Smile, TrendingUp, Moon, Brain, User, ChevronRight, BookHeart, History,
+  Clock, Loader2, X, Lightbulb, Sparkles
 } from 'lucide-react';
 import { Child, Screen } from '../types';
 import ChildSelector from '../components/ChildSelector';
+import { GoogleGenAI } from "@google/genai";
 
 interface DashboardScreenProps {
   selectedChild: Child | null;
@@ -18,6 +21,9 @@ interface DashboardScreenProps {
 
 const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSelectedChild, onNavigate }) => {
   const [reportType, setReportType] = useState<'weekly' | 'monthly'>('weekly');
+  const [isGeneratingRecs, setIsGeneratingRecs] = useState(false);
+  const [recs, setRecs] = useState<string[] | null>(null);
+  const [showRecsModal, setShowRecsModal] = useState(false);
 
   const sleepData = [
     { name: 'Goal', value: 100, fill: '#f1f5f9' },
@@ -32,13 +38,38 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
     { day: 'Fri', calm: 8, energetic: 6, fussy: 1 },
   ];
 
-  const physicalData = [
-    { day: 'Mon', appetite: 85 },
-    { day: 'Tue', appetite: 92 },
-    { day: 'Wed', appetite: 78 },
-    { day: 'Thu', appetite: 94 },
-    { day: 'Fri', appetite: 90 },
+  const presenceData = [
+    { day: 'Mon', hours: 8.5 },
+    { day: 'Tue', hours: 9.0 },
+    { day: 'Wed', hours: 7.5 },
+    { day: 'Thu', hours: 8.2 },
+    { day: 'Fri', hours: 8.8 },
   ];
+
+  const handleGetRecommendations = async () => {
+    if (!selectedChild) return;
+    setShowRecsModal(true);
+    setIsGeneratingRecs(true);
+    
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: `As a world-class child psychologist, provide 3 brief, actionable pedagogical recommendations for a ${selectedChild.age} child named ${selectedChild.name} in a ${selectedChild.section} section. 
+        Focus on social integration, sleep quality (currently 75% of goal), and energetic behavior. 
+        Format as a simple list of 3 items. Keep each under 20 words.`,
+      });
+      
+      const text = response.text || "";
+      const tips = text.split('\n').filter(t => t.trim()).slice(0, 3).map(t => t.replace(/^\d+\.\s*/, '').trim());
+      setRecs(tips.length > 0 ? tips : ["Focus on sensory play", "Maintain sleep routine", "Encourage group sharing"]);
+    } catch (error) {
+      console.error("AI Recommendation error:", error);
+      setRecs(["Encourage parallel play to build social trust", "Introduce a consistent 5-minute pre-nap cooling period", "Use active storytelling to channel high morning energy"]);
+    } finally {
+      setIsGeneratingRecs(false);
+    }
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-right-6 duration-700 pb-24">
@@ -62,16 +93,56 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <button className="flex items-center space-x-2 px-5 py-2.5 bg-white border border-indigo-200 text-indigo-600 rounded-full text-xs font-black hover:bg-indigo-50 transition-colors shadow-sm">
-                <FileText size={16} />
-                <span>Export for Professional</span>
-              </button>
-              <button className="flex items-center space-x-2 px-5 py-2.5 bg-[#00A389] text-white rounded-full text-xs font-black hover:bg-[#008F78] transition-colors shadow-sm">
+              <button 
+                onClick={handleGetRecommendations}
+                className="flex items-center space-x-2 px-6 py-3 bg-[#00A389] text-white rounded-full text-xs font-black hover:bg-[#008F78] hover:scale-105 active:scale-95 transition-all shadow-lg shadow-teal-100"
+              >
                 <Brain size={16} />
                 <span>Pedagogical Recommendations</span>
               </button>
             </div>
           </section>
+
+          {/* AI Recommendations Modal Overlay */}
+          {showRecsModal && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-md animate-in fade-in duration-300">
+              <div className="bg-white rounded-[3rem] w-full max-w-xl shadow-2xl overflow-hidden border border-white/50 animate-in zoom-in-95 duration-300">
+                <div className="bg-gradient-to-r from-[#00A389] to-indigo-600 p-8 text-white relative">
+                  <button onClick={() => setShowRecsModal(false)} className="absolute top-6 right-6 p-2 hover:bg-white/20 rounded-full transition-colors">
+                    <X size={20} />
+                  </button>
+                  <div className="flex items-center space-x-4 mb-2">
+                    <div className="bg-white/20 p-2 rounded-xl"><Brain size={24} /></div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em]">AI Pedagogical Brain</span>
+                  </div>
+                  <h3 className="text-2xl font-black">Expert Tips for {selectedChild.name.split(' ')[0]}</h3>
+                </div>
+                
+                <div className="p-10 space-y-6">
+                  {isGeneratingRecs ? (
+                    <div className="py-12 flex flex-col items-center space-y-4 text-slate-400">
+                      <div className="relative">
+                        <Loader2 size={48} className="animate-spin text-teal-500" />
+                        <Sparkles size={20} className="absolute -top-1 -right-1 text-amber-400 animate-pulse" />
+                      </div>
+                      <p className="font-black text-sm uppercase tracking-widest">Consulting Development Agents...</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4 animate-in slide-in-from-bottom-4 duration-500">
+                      {recs?.map((tip, idx) => (
+                        <div key={idx} className="flex items-start space-x-4 bg-slate-50 p-6 rounded-2xl border border-slate-100 group hover:border-teal-200 transition-colors">
+                          <div className="bg-white p-2 rounded-lg text-teal-500 shadow-sm group-hover:bg-teal-50 transition-colors">
+                            <Lightbulb size={20} />
+                          </div>
+                          <p className="text-slate-700 font-bold leading-relaxed">{tip}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Report Toggle */}
           <div className="flex justify-center">
@@ -93,7 +164,6 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
 
           {/* Insights Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Sleep, Mood, Physical Health Cards... */}
             {/* Sleep Quality Card */}
             <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-50 flex flex-col items-center">
               <div className="w-full flex items-center space-x-4 mb-8">
@@ -175,41 +245,45 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
               </div>
             </div>
 
-            {/* Physical Health Card */}
+            {/* Presence Hours Card */}
             <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-50 flex flex-col">
               <div className="w-full flex items-center space-x-4 mb-8">
-                <div className="w-10 h-10 bg-[#3B82F6] rounded-xl flex items-center justify-center text-white">
-                  <Activity size={20} />
+                <div className="w-10 h-10 bg-[#4F46E5] rounded-xl flex items-center justify-center text-white">
+                  <Clock size={20} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-black text-[#1E293B]">Physical Health</h4>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Appetite & consistency</p>
+                  <h4 className="text-sm font-black text-[#1E293B]">Presence Hours</h4>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Attendance duration</p>
                 </div>
               </div>
               
               <div className="h-52 w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={physicalData}>
+                  <BarChart data={presenceData}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                     <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 700 }} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 700 }} domain={[0, 100]} />
-                    <Line type="monotone" dataKey="appetite" stroke="#3B82F6" strokeWidth={4} dot={{ r: 6, fill: '#3B82F6' }} />
-                  </LineChart>
+                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8', fontWeight: 700 }} domain={[0, 12]} />
+                    <Bar dataKey="hours" radius={[6, 6, 0, 0]} barSize={24}>
+                      {presenceData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.hours >= 8 ? '#4F46E5' : '#818CF8'} />
+                      ))}
+                    </Bar>
+                  </BarChart>
                 </ResponsiveContainer>
               </div>
 
               <div className="w-full mt-8 space-y-2">
                 <div className="flex justify-between text-xs font-bold">
-                  <span className="text-slate-400">Average Appetite:</span>
-                  <span className="text-slate-700">86%</span>
+                  <span className="text-slate-400">Weekly Total:</span>
+                  <span className="text-slate-700">42h 00m</span>
                 </div>
                 <div className="flex justify-between text-xs font-bold">
-                  <span className="text-slate-400">Stool Consistency:</span>
-                  <span className="text-slate-700">Normal</span>
+                  <span className="text-slate-400">Daily Average:</span>
+                  <span className="text-slate-700">8.4 hours</span>
                 </div>
                 <div className="flex justify-between text-xs font-bold">
-                  <span className="text-slate-400">Hydration:</span>
-                  <span className="text-green-500">Good</span>
+                  <span className="text-slate-400">Attendance Status:</span>
+                  <span className="text-indigo-500">Regular</span>
                 </div>
               </div>
             </div>
@@ -242,16 +316,16 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
                 </p>
               </div>
 
-              <div className="bg-[#FFF5E6] border-l-4 border-[#FF5C00] rounded-2xl p-6">
-                <h5 className="text-sm font-black text-[#9A3412] mb-2">Nutritional Observations</h5>
-                <p className="text-sm text-[#9A3412] leading-relaxed font-medium">
-                  Appetite remains strong and consistent. The child shows healthy eating patterns with a preference for fruits and proteins. Continue offering variety to support balanced nutrition.
+              <div className="bg-[#EBEBFF] border-l-4 border-[#4F46E5] rounded-2xl p-6">
+                <h5 className="text-sm font-black text-[#3730A3] mb-2">Attendance Summary</h5>
+                <p className="text-sm text-[#3730A3] leading-relaxed font-medium">
+                  Presence hours are stable and aligned with the enrollment plan. Consistent attendance is supporting strong social integration with peers and early morning activities.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* SYNTHESIS SECTION (As per mockup) */}
+          {/* SYNTHESIS SECTION */}
           <section className="bg-white/90 backdrop-blur rounded-[2.5rem] p-10 border-2 border-dashed border-indigo-200 space-y-6 animate-in fade-in duration-700">
             <div className="flex items-center space-x-4 text-indigo-600">
               <div className="bg-indigo-50 p-3 rounded-2xl">
@@ -267,7 +341,7 @@ const DashboardScreen: React.FC<DashboardScreenProps> = ({ selectedChild, setSel
               <p className="text-slate-600 font-bold leading-relaxed text-sm">
                 Overall, {selectedChild.name} has had a remarkably consistent {reportType === 'weekly' ? 'week' : 'month'}. 
                 The core focus remains on social integration, where we've seen a {reportType === 'weekly' ? '15%' : '25%'} increase in self-initiated peer play. 
-                Physical energy levels have peaked during mid-morning activity sessions, and their nutritional intake has exceeded average baselines for the period.
+                Presence hours have been consistent with early arrivals on Tuesday and Thursday, allowing for more focused creative time.
                 The transition into nap time has become significantly smoother, indicating growing comfort and environmental trust.
               </p>
             </div>

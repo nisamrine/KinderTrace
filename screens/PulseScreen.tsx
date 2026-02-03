@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
-  Mic, BookOpen, User, Loader2, Info, Clock, Moon, Smile, ChevronDown, Database, 
-  Palette, Plus, ChevronRight, TrendingUp, Edit3, CheckCircle2
+  Mic, BookOpen, User, Loader2, Clock, 
+  Palette, Plus, ChevronRight, TrendingUp, CheckCircle2,
+  StopCircle, Smile
 } from 'lucide-react';
 import { Child, Screen } from '../types';
 import ChildSelector from '../components/ChildSelector';
@@ -14,36 +15,82 @@ interface ObservationScreenProps {
 }
 
 const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, setSelectedChild, onNavigate }) => {
-  const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showLogbook, setShowLogbook] = useState(false);
-  const [dictatedText, setDictatedText] = useState('');
-  
+  const [staffNotes, setStaffNotes] = useState('');
+  const [parentNotes, setParentNotes] = useState('');
+  const [isRecordingNote, setIsRecordingNote] = useState<'staff' | 'parent' | null>(null);
+
   const [activeBehaviorTags, setActiveBehaviorTags] = useState<string[]>(['Happy']);
   const [activeActivityTags, setActiveActivityTags] = useState<string[]>(['Paint']);
   const [otherBehavior, setOtherBehavior] = useState('');
   const [otherActivity, setOtherActivity] = useState('');
 
-  const toggleRecording = () => {
-    if (isRecording) {
-      setIsRecording(false);
-      setIsProcessing(true);
-      // Simulate transcription result
-      setTimeout(() => {
-        setIsProcessing(false);
-        setDictatedText(`${selectedChild?.name} had a wonderful morning. They played with the wooden blocks for 20 minutes and showed great interest in the new picture book about animals.`);
-      }, 2000);
-    } else {
-      setIsRecording(true);
-    }
-  };
+  // Ref to store the recognition instance
+  const recognitionRef = useRef<any>(null);
 
-  const handleSubmitVoiceEntry = () => {
-    setIsProcessing(true);
-    setTimeout(() => {
-      setIsProcessing(false);
-      setDictatedText('');
-    }, 1500);
+  const handleVoiceNote = (type: 'staff' | 'parent') => {
+    // If already recording the same type, stop it
+    if (isRecordingNote === type) {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+      return;
+    }
+
+    // Stop existing if switching
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Speech recognition is not supported in this browser. Please use a modern browser like Chrome or Safari.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    // continuous: true allows the user to keep speaking even after pauses
+    recognition.continuous = true;
+    // interimResults: true gives us partial text before it's finalized
+    recognition.interimResults = true;
+
+    recognition.onstart = () => {
+      setIsRecordingNote(type);
+    };
+
+    recognition.onresult = (event: any) => {
+      let finalTranscript = '';
+      
+      // Iterate through the results to find finalized transcripts
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript;
+        }
+      }
+
+      // Append finalized transcript to the current text field
+      if (finalTranscript) {
+        if (type === 'staff') {
+          setStaffNotes(prev => (prev ? prev.trim() + ' ' : '') + finalTranscript.trim());
+        } else {
+          setParentNotes(prev => (prev ? prev.trim() + ' ' : '') + finalTranscript.trim());
+        }
+      }
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error("Speech recognition error", event.error);
+      setIsRecordingNote(null);
+    };
+
+    recognition.onend = () => {
+      setIsRecordingNote(null);
+      recognitionRef.current = null;
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
   };
 
   const toggleTag = (tag: string, list: string[], setter: (val: string[]) => void) => {
@@ -54,309 +101,223 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
   const activityTags = ['Dance', 'Baby Yoga', 'Paint', 'Storytime', 'Garden'];
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-700 pb-20">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-700 pb-20 max-w-4xl mx-auto">
       <ChildSelector selectedChild={selectedChild} onSelect={setSelectedChild} />
 
       {selectedChild ? (
-        <>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            {/* Voice Entry Card */}
-            <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-50 space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-[#FF5C00] rounded-2xl flex items-center justify-center text-white shadow-lg shadow-orange-100">
-                  <Mic size={24} />
-                </div>
-                <div>
-                  <h4 className="text-xl font-black text-[#1E293B]">Voice Entry</h4>
-                  <p className="text-sm font-bold text-slate-400">Record observations naturally</p>
-                </div>
+        <div className="flex flex-col space-y-8">
+          {/* Manual Logbook - Primary Interface */}
+          <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-slate-50">
+            <div className="flex items-center space-x-5 mb-10">
+              <div className="w-14 h-14 bg-[#00A389] rounded-2xl flex items-center justify-center text-white shadow-lg shadow-teal-100">
+                <BookOpen size={28} />
               </div>
-
-              <div className="bg-[#FFF5E6] rounded-[2rem] aspect-[16/9] flex flex-col items-center justify-center space-y-4 border border-orange-50/50">
-                <div className={`w-20 h-20 rounded-full flex items-center justify-center shadow-xl transition-all ${isRecording ? 'bg-white text-red-500 animate-pulse' : 'bg-[#FF5C00] text-white'}`}>
-                  {isRecording ? <div className="w-8 h-8 bg-red-500 rounded-sm" /> : <Mic size={32} />}
-                </div>
-                <span className="text-sm font-black text-orange-800 tracking-tight">
-                  {isRecording ? 'Listening carefully...' : 'Ready to record'}
-                </span>
-              </div>
-
-              <button
-                onClick={toggleRecording}
-                className={`w-full py-5 rounded-[1.5rem] font-black text-lg shadow-xl transition-all transform active:scale-95 flex items-center justify-center space-x-3 ${
-                  isRecording ? 'bg-red-500 text-white shadow-red-100' : 'bg-[#FF5C00] text-white shadow-orange-100'
-                }`}
-              >
-                <Mic size={20} />
-                <span>{isRecording ? 'Stop Recording' : 'Start Recording'}</span>
-              </button>
-
-              <div className="bg-[#EBF5FF] rounded-2xl p-4 flex items-center space-x-3 border border-blue-100">
-                <Info size={18} className="text-blue-500" />
-                <p className="text-[11px] font-bold text-blue-600">AI will transcribe and extract key data points automatically</p>
+              <div>
+                <h4 className="text-2xl font-black text-[#1E293B]">Manual Logbook</h4>
+                <p className="text-sm font-bold text-slate-400">Structured data entry</p>
               </div>
             </div>
 
-            {/* Manual Logbook Card */}
-            <div className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-50 min-h-full">
-              <div className="flex items-center space-x-4 mb-8">
-                <div className="w-12 h-12 bg-[#00A389] rounded-2xl flex items-center justify-center text-white shadow-lg shadow-teal-100">
-                  <BookOpen size={24} />
+            <div className="space-y-8 animate-in fade-in duration-500">
+              {/* Arrival & Departure */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
+                    <Clock size={14} className="text-[#00A389]" />
+                    <span>Arrival Time</span>
+                  </label>
+                  <input type="time" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 px-5 outline-none focus:ring-2 focus:ring-[#00A389]/20 font-bold text-slate-700 transition-all" />
                 </div>
-                <div>
-                  <h4 className="text-xl font-black text-[#1E293B]">Manual Logbook</h4>
-                  <p className="text-sm font-bold text-slate-400">Structured data entry</p>
+                <div className="space-y-3">
+                  <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
+                    <Clock size={14} className="text-[#00A389]" />
+                    <span>Departure Time</span>
+                  </label>
+                  <input type="time" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 px-5 outline-none focus:ring-2 focus:ring-[#00A389]/20 font-bold text-slate-700 transition-all" />
                 </div>
               </div>
 
-              {!showLogbook ? (
-                <div className="flex flex-col items-center justify-center space-y-8 py-12">
-                  <div className="w-24 h-24 bg-[#E0F7F4] text-[#00A389] rounded-[2rem] flex items-center justify-center shadow-inner">
-                    <BookOpen size={48} />
-                  </div>
-                  <p className="text-sm font-bold text-slate-400 text-center max-w-[240px]">
-                    Fill out the structured form for detailed logging
-                  </p>
-                  <button
-                    onClick={() => setShowLogbook(true)}
-                    className="bg-[#00A389] hover:bg-[#008F78] text-white px-10 py-4 rounded-2xl font-black shadow-lg shadow-teal-100 transition-all transform hover:scale-105 active:scale-95"
-                  >
-                    Open Logbook
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-6 animate-in fade-in slide-in-from-top-4 duration-500">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
-                        <Clock size={14} className="text-indigo-500" />
-                        <span>Arrival Time</span>
-                      </label>
-                      <input type="time" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
-                        <Clock size={14} className="text-indigo-500" />
-                        <span>Departure Time</span>
-                      </label>
-                      <input type="time" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700" />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
-                        <Moon size={14} className="text-indigo-500" />
-                        <span>Sleep Start</span>
-                      </label>
-                      <input type="time" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
-                        <Moon size={14} className="text-indigo-500" />
-                        <span>Sleep End</span>
-                      </label>
-                      <input type="time" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
-                      <Database size={14} className="text-indigo-500" />
-                      <span>Stool Type</span>
-                    </label>
-                    <div className="relative">
-                      <select className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700 appearance-none cursor-pointer">
-                        <option>Select type</option>
-                        <option>Normal</option>
-                        <option>Loose</option>
-                        <option>Hard</option>
-                      </select>
-                      <ChevronDown size={18} className="absolute right-4 top-3.5 text-slate-400 pointer-events-none" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
-                      <Palette size={14} className="text-indigo-500" />
-                      <span>Activity</span>
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {activityTags.map(tag => (
-                        <button
-                          key={tag}
-                          onClick={() => toggleTag(tag, activeActivityTags, setActiveActivityTags)}
-                          className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
-                            activeActivityTags.includes(tag) 
-                              ? 'bg-[#00A389] text-white shadow-md' 
-                              : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
-                          }`}
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                      <div className="flex items-center bg-slate-50 rounded-full px-4 border border-slate-200 border-dashed">
-                        <Plus size={14} className="text-slate-400 mr-2" />
-                        <input 
-                          type="text" 
-                          placeholder="Add other category..." 
-                          className="bg-transparent text-xs font-bold outline-none py-2 w-24 placeholder:text-slate-300"
-                          value={otherActivity}
-                          onChange={(e) => setOtherActivity(e.target.value)}
-                          onBlur={() => { if(otherActivity) { toggleTag(otherActivity, activeActivityTags, setActiveActivityTags); setOtherActivity(''); } }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
-                      <Smile size={14} className="text-indigo-500" />
-                      <span>Behavior Tags</span>
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {behaviorTags.map(tag => (
-                        <button
-                          key={tag}
-                          onClick={() => toggleTag(tag, activeBehaviorTags, setActiveBehaviorTags)}
-                          className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
-                            activeBehaviorTags.includes(tag) 
-                              ? 'bg-indigo-600 text-white shadow-md' 
-                              : 'bg-[#EBF5FF] text-blue-600 hover:bg-blue-100'
-                          }`}
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                      <div className="flex items-center bg-[#EBF5FF] rounded-full px-4 border border-blue-200 border-dashed">
-                        <Plus size={14} className="text-blue-400 mr-2" />
-                        <input 
-                          type="text" 
-                          placeholder="Add other category..." 
-                          className="bg-transparent text-xs font-bold outline-none py-2 w-24 placeholder:text-blue-300"
-                          value={otherBehavior}
-                          onChange={(e) => setOtherBehavior(e.target.value)}
-                          onBlur={() => { if(otherBehavior) { toggleTag(otherBehavior, activeBehaviorTags, setActiveBehaviorTags); setOtherBehavior(''); } }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 pt-2">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black text-[#1E293B] uppercase tracking-wider block">Staff Notes</label>
-                      <textarea
-                        placeholder="Add staff observations..."
-                        className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700 min-h-[80px] resize-none"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label className="text-xs font-black text-indigo-600 uppercase tracking-wider block">Parents Notes</label>
-                      <textarea
-                        placeholder="Add parents observations..."
-                        className="w-full bg-indigo-50/30 border border-indigo-100 rounded-2xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-200 font-bold text-slate-700 min-h-[80px] resize-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-4 pt-4 pb-2">
-                    <button
-                      onClick={() => setShowLogbook(false)}
-                      className="flex-1 py-4 bg-slate-100 text-slate-600 rounded-2xl font-black hover:bg-slate-200 transition-all"
+              {/* Activity Tags */}
+              <div className="space-y-4">
+                <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
+                  <Palette size={14} className="text-[#00A389]" />
+                  <span>Activity</span>
+                </label>
+                <div className="flex flex-wrap gap-2.5">
+                  {activityTags.map(tag => (
+                    <button 
+                      key={tag} 
+                      onClick={() => toggleTag(tag, activeActivityTags, setActiveActivityTags)} 
+                      className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${
+                        activeActivityTags.includes(tag) 
+                        ? 'bg-[#00A389] text-white shadow-md' 
+                        : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
+                      }`}
                     >
-                      Cancel
+                      {tag}
                     </button>
-                    <button
-                      onClick={() => {
-                        setIsProcessing(true);
-                        setTimeout(() => {
-                          setIsProcessing(false);
-                          setShowLogbook(false);
-                        }, 1500);
-                      }}
-                      className="flex-[2] py-4 bg-[#00A389] text-white rounded-2xl font-black shadow-lg shadow-teal-50 hover:bg-[#008F78] transition-all"
-                    >
-                      Save Entry
-                    </button>
+                  ))}
+                  <div className="flex items-center bg-white rounded-full px-5 border border-slate-200 border-dashed hover:border-[#00A389] transition-colors">
+                    <Plus size={14} className="text-slate-400 mr-2" />
+                    <input 
+                      type="text" 
+                      placeholder="Add other category..." 
+                      className="bg-transparent text-sm font-bold outline-none py-2 w-36 placeholder:text-slate-300"
+                      value={otherActivity}
+                      onChange={(e) => setOtherActivity(e.target.value)}
+                      onBlur={() => { if(otherActivity) { toggleTag(otherActivity, activeActivityTags, setActiveActivityTags); setOtherActivity(''); } }}
+                      onKeyDown={(e) => { if(e.key === 'Enter' && otherActivity) { toggleTag(otherActivity, activeActivityTags, setActiveActivityTags); setOtherActivity(''); } }}
+                    />
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
+              </div>
 
-          {/* TRANSCRIPTION RESULT FIELD (As per mockup) */}
-          {dictatedText && (
-            <div className="bg-white/90 backdrop-blur rounded-[2.5rem] p-8 border-2 border-dashed border-blue-200 animate-in slide-in-from-bottom-4 duration-500 space-y-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3 text-blue-600">
-                  <Edit3 size={18} />
-                  <span className="text-xs font-black uppercase tracking-widest">Dictated Text Review</span>
+              {/* Behavior Tags */}
+              <div className="space-y-4">
+                <label className="flex items-center space-x-2 text-xs font-black text-[#1E293B] uppercase tracking-wider">
+                  <Smile size={14} className="text-indigo-500" />
+                  <span>Behavior Tags</span>
+                </label>
+                <div className="flex flex-wrap gap-2.5">
+                  {behaviorTags.map(tag => (
+                    <button 
+                      key={tag} 
+                      onClick={() => toggleTag(tag, activeBehaviorTags, setActiveBehaviorTags)} 
+                      className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${
+                        activeBehaviorTags.includes(tag) 
+                        ? 'bg-indigo-600 text-white shadow-md' 
+                        : 'bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100'
+                      }`}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                  <div className="flex items-center bg-white rounded-full px-5 border border-slate-200 border-dashed hover:border-indigo-400 transition-colors">
+                    <Plus size={14} className="text-indigo-300 mr-2" />
+                    <input 
+                      type="text" 
+                      placeholder="Add other category..." 
+                      className="bg-transparent text-sm font-bold outline-none py-2 w-36 placeholder:text-indigo-200"
+                      value={otherBehavior}
+                      onChange={(e) => setOtherBehavior(e.target.value)}
+                      onBlur={() => { if(otherBehavior) { toggleTag(otherBehavior, activeBehaviorTags, setActiveBehaviorTags); setOtherBehavior(''); } }}
+                      onKeyDown={(e) => { if(e.key === 'Enter' && otherBehavior) { toggleTag(otherBehavior, activeBehaviorTags, setActiveBehaviorTags); setOtherBehavior(''); } }}
+                    />
+                  </div>
                 </div>
+              </div>
+
+              {/* Notes Sections */}
+              <div className="space-y-8 pt-4">
+                {/* STAFF NOTES */}
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-[#1E293B] uppercase tracking-wider block">Staff Notes</label>
+                  <div className="relative group">
+                    <textarea
+                      placeholder="Add staff observations..."
+                      value={staffNotes}
+                      onChange={(e) => setStaffNotes(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-100 rounded-[2rem] py-5 pl-6 pr-16 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700 min-h-[140px] resize-none transition-all"
+                    />
+                    <div className="absolute bottom-5 right-5 flex items-center space-x-2">
+                      <button 
+                        onClick={() => handleVoiceNote('staff')}
+                        className={`p-3 rounded-2xl border-2 border-dashed transition-all shadow-sm ${
+                          isRecordingNote === 'staff' 
+                          ? 'bg-red-500 border-red-500 text-white animate-pulse' 
+                          : 'bg-white border-blue-200 text-blue-500 hover:bg-blue-50'
+                        }`}
+                        title={isRecordingNote === 'staff' ? "Stop recording" : "Speak to write notes"}
+                      >
+                        {isRecordingNote === 'staff' ? <StopCircle size={20} /> : <Mic size={20} />}
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] pl-2">ai will transcribe automatically</p>
+                </div>
+                
+                {/* PARENT NOTES */}
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-indigo-600 uppercase tracking-wider block">Parents Notes</label>
+                  <div className="relative group">
+                    <textarea
+                      placeholder="Add parents observations..."
+                      value={parentNotes}
+                      onChange={(e) => setParentNotes(e.target.value)}
+                      className="w-full bg-indigo-50/20 border border-indigo-100 rounded-[2rem] py-5 pl-6 pr-16 outline-none focus:ring-2 focus:ring-indigo-200 font-bold text-slate-700 min-h-[140px] resize-none transition-all"
+                    />
+                    <div className="absolute bottom-5 right-5 flex items-center space-x-2">
+                      <button 
+                        onClick={() => handleVoiceNote('parent')}
+                        className={`p-3 rounded-2xl border-2 border-dashed transition-all shadow-sm ${
+                          isRecordingNote === 'parent' 
+                          ? 'bg-red-500 border-red-500 text-white animate-pulse' 
+                          : 'bg-white border-blue-200 text-blue-500 hover:bg-blue-50'
+                        }`}
+                        title={isRecordingNote === 'parent' ? "Stop recording" : "Speak to write notes"}
+                      >
+                        {isRecordingNote === 'parent' ? <StopCircle size={20} /> : <Mic size={20} />}
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-[10px] font-black text-indigo-300 uppercase tracking-[0.2em] pl-2">ai will transcribe automatically</p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-5 pt-10">
                 <button 
-                  onClick={() => setDictatedText('')}
-                  className="text-xs font-black text-slate-300 hover:text-slate-500 uppercase"
+                  onClick={() => onNavigate('dashboard')} 
+                  className="w-full sm:flex-1 py-5 bg-slate-100 text-slate-600 rounded-[1.5rem] font-black hover:bg-slate-200 transition-all text-lg shadow-sm"
                 >
-                  Clear
+                  Cancel
+                </button>
+                <button 
+                  onClick={() => { 
+                    setIsProcessing(true); 
+                    setTimeout(() => { 
+                      setIsProcessing(false); 
+                      onNavigate('dashboard');
+                    }, 1500); 
+                  }} 
+                  className="w-full sm:flex-[2] py-5 bg-[#00A389] text-white rounded-[1.5rem] font-black shadow-xl shadow-teal-100 hover:bg-[#008F78] hover:scale-[1.02] active:scale-95 transition-all text-lg flex items-center justify-center space-x-3"
+                >
+                  <CheckCircle2 size={24} />
+                  <span>Save Entry</span>
                 </button>
               </div>
-              <textarea
-                value={dictatedText}
-                onChange={(e) => setDictatedText(e.target.value)}
-                className="w-full bg-blue-50/30 border-none rounded-2xl p-4 text-slate-700 font-bold text-sm leading-relaxed outline-none focus:ring-2 focus:ring-blue-100 min-h-[120px] resize-none"
-                placeholder="Transcribed text will appear here..."
-              />
-              
-              {/* SUBMIT BUTTON (NEW - Based on mockup) */}
-              <button
-                onClick={handleSubmitVoiceEntry}
-                className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-black shadow-xl shadow-blue-100 flex items-center justify-center space-x-3 transform transition-all active:scale-95 hover:shadow-2xl hover:-translate-y-0.5"
-              >
-                <CheckCircle2 size={20} />
-                <span>Submit Observation</span>
-              </button>
-
-              <p className="text-[10px] font-black text-blue-300 uppercase tracking-widest text-center">
-                Tap the text above to edit if needed
-              </p>
             </div>
-          )}
+          </div>
 
-          {/* NEXT SECTION NAV BUTTON */}
-          <div className="flex justify-center pt-8">
-            <button
-              onClick={() => onNavigate('dashboard')}
-              className="group relative flex items-center space-x-4 bg-white/80 backdrop-blur-sm border-2 border-orange-200 px-12 py-5 rounded-[2rem] text-orange-600 font-black text-xl hover:bg-orange-50 hover:border-orange-400 transition-all shadow-xl shadow-orange-100/50"
+          {/* NEXT SECTION NAV BUTTON (Small footer navigation) */}
+          <div className="flex justify-center pt-4">
+            <button 
+              onClick={() => onNavigate('dashboard')} 
+              className="group flex items-center space-x-4 bg-white/60 backdrop-blur-sm border border-slate-100 px-10 py-4 rounded-full text-slate-400 font-black text-sm hover:bg-white hover:text-[#00A389] transition-all shadow-sm"
             >
-              <div className="bg-orange-100 p-2 rounded-xl group-hover:scale-110 transition-transform">
-                <TrendingUp size={24} />
-              </div>
-              <span>View Analytics & Insights</span>
-              <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform" />
+              <TrendingUp size={18} />
+              <span>Jump to Analytics</span>
+              <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
-        </>
+        </div>
       ) : (
-        <div className="h-96 flex flex-col items-center justify-center text-slate-300 space-y-6 animate-pulse">
-          <div className="w-24 h-24 bg-slate-50 rounded-[2.5rem] flex items-center justify-center">
-            <User size={48} className="opacity-30" />
+        <div className="h-[600px] flex flex-col items-center justify-center text-slate-300 space-y-8 animate-pulse bg-white rounded-[3rem] border-2 border-dashed border-slate-100">
+          <div className="w-28 h-28 bg-slate-50 rounded-[2.5rem] flex items-center justify-center">
+            <User size={56} className="opacity-20" />
           </div>
-          <p className="font-black text-lg uppercase tracking-widest text-slate-400">Select a child to begin</p>
+          <div className="text-center">
+            <p className="font-black text-2xl uppercase tracking-[0.2em] text-slate-300">Observation Mode</p>
+            <p className="text-sm font-bold text-slate-400 mt-2">Select a child from the list above to start documenting</p>
+          </div>
         </div>
       )}
 
       {/* Processing State Overlay */}
-      <div className={`fixed bottom-24 left-6 right-6 md:bottom-10 md:left-auto md:right-10 md:w-96 p-6 rounded-[2rem] transition-all duration-700 transform z-50 ${
-        isProcessing ? 'translate-y-0 opacity-100 bg-gradient-to-r from-[#00A389] to-indigo-600 text-white shadow-2xl shadow-indigo-200' : 'translate-y-24 opacity-0 pointer-events-none'
-      }`}>
+      <div className={`fixed bottom-24 left-6 right-6 md:bottom-10 md:left-auto md:right-10 md:w-96 p-6 rounded-[2rem] transition-all duration-700 transform z-50 ${isProcessing ? 'translate-y-0 opacity-100 bg-gradient-to-r from-[#00A389] to-indigo-600 text-white shadow-2xl shadow-indigo-200' : 'translate-y-24 opacity-0 pointer-events-none'}`}>
         <div className="flex items-center space-x-5">
-          <div className="bg-white/20 p-3 rounded-2xl animate-spin">
-            <Loader2 size={24} />
-          </div>
-          <div>
-            <p className="font-black text-lg">Syncing Observation</p>
-            <p className="text-xs opacity-90 font-bold uppercase tracking-widest">Processing structured logs...</p>
-          </div>
+          <div className="bg-white/20 p-3 rounded-2xl animate-spin"><Loader2 size={24} /></div>
+          <div><p className="font-black text-lg">Syncing Observation</p><p className="text-xs opacity-90 font-bold uppercase tracking-widest">Processing structured logs...</p></div>
         </div>
       </div>
     </div>
