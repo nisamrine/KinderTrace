@@ -5,6 +5,7 @@ export interface Child {
   age: string;
   section: string;
   avatar: string;
+  visualDescription: string;
 }
 
 export interface StoryPage {

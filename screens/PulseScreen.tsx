@@ -25,8 +25,9 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
   const [otherBehavior, setOtherBehavior] = useState('');
   const [otherActivity, setOtherActivity] = useState('');
 
-  // Ref to store the recognition instance
+  // Ref to store the recognition instance and initial text for the session
   const recognitionRef = useRef<any>(null);
+  const initialTextRef = useRef<string>('');
 
   const handleVoiceNote = (type: 'staff' | 'parent') => {
     // If already recording the same type, stop it
@@ -50,32 +51,32 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
 
     const recognition = new SpeechRecognition();
     recognition.lang = 'en-US';
-    // continuous: true allows the user to keep speaking even after pauses
     recognition.continuous = true;
-    // interimResults: true gives us partial text before it's finalized
     recognition.interimResults = true;
+
+    // Capture the text state at the start of recording
+    initialTextRef.current = type === 'staff' ? staffNotes : parentNotes;
 
     recognition.onstart = () => {
       setIsRecordingNote(type);
     };
 
     recognition.onresult = (event: any) => {
-      let finalTranscript = '';
-      
-      // Iterate through the results to find finalized transcripts
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript;
-        }
+      // Collect the full transcript for this session (both finalized and interim)
+      let sessionTranscript = '';
+      for (let i = 0; i < event.results.length; ++i) {
+        sessionTranscript += event.results[i][0].transcript;
       }
 
-      // Append finalized transcript to the current text field
-      if (finalTranscript) {
-        if (type === 'staff') {
-          setStaffNotes(prev => (prev ? prev.trim() + ' ' : '') + finalTranscript.trim());
-        } else {
-          setParentNotes(prev => (prev ? prev.trim() + ' ' : '') + finalTranscript.trim());
-        }
+      // Combine initial text with the current session transcript
+      const currentInitial = initialTextRef.current.trim();
+      const currentSession = sessionTranscript.trim();
+      const newText = currentInitial ? `${currentInitial} ${currentSession}` : currentSession;
+
+      if (type === 'staff') {
+        setStaffNotes(newText);
+      } else {
+        setParentNotes(newText);
       }
     };
 
@@ -214,10 +215,11 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
                   <label className="text-xs font-black text-[#1E293B] uppercase tracking-wider block">Staff Notes</label>
                   <div className="relative group">
                     <textarea
+                      disabled={isRecordingNote === 'staff'}
                       placeholder="Add staff observations..."
                       value={staffNotes}
                       onChange={(e) => setStaffNotes(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-100 rounded-[2rem] py-5 pl-6 pr-16 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700 min-h-[140px] resize-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-100 rounded-[2rem] py-5 pl-6 pr-16 outline-none focus:ring-2 focus:ring-indigo-100 font-bold text-slate-700 min-h-[140px] resize-none transition-all disabled:bg-slate-100 disabled:opacity-75"
                     />
                     <div className="absolute bottom-5 right-5 flex items-center space-x-2">
                       <button 
@@ -241,10 +243,11 @@ const ObservationScreen: React.FC<ObservationScreenProps> = ({ selectedChild, se
                   <label className="text-xs font-black text-indigo-600 uppercase tracking-wider block">Parents Notes</label>
                   <div className="relative group">
                     <textarea
+                      disabled={isRecordingNote === 'parent'}
                       placeholder="Add parents observations..."
                       value={parentNotes}
                       onChange={(e) => setParentNotes(e.target.value)}
-                      className="w-full bg-indigo-50/20 border border-indigo-100 rounded-[2rem] py-5 pl-6 pr-16 outline-none focus:ring-2 focus:ring-indigo-200 font-bold text-slate-700 min-h-[140px] resize-none transition-all"
+                      className="w-full bg-indigo-50/20 border border-indigo-100 rounded-[2rem] py-5 pl-6 pr-16 outline-none focus:ring-2 focus:ring-indigo-200 font-bold text-slate-700 min-h-[140px] resize-none transition-all disabled:bg-indigo-50/20 disabled:opacity-75"
                     />
                     <div className="absolute bottom-5 right-5 flex items-center space-x-2">
                       <button 

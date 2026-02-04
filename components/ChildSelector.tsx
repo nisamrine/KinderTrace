@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search, Star, User } from 'lucide-react';
+import { Search, Star } from 'lucide-react';
 import { MOCK_CHILDREN } from '../constants';
 import { Child } from '../types';
 
@@ -11,10 +11,15 @@ interface ChildSelectorProps {
 
 const ChildSelector: React.FC<ChildSelectorProps> = ({ selectedChild, onSelect }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   const filteredChildren = MOCK_CHILDREN.filter(c =>
     c.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleImageError = (id: string) => {
+    setImageErrors(prev => ({ ...prev, [id]: true }));
+  };
 
   return (
     <section className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 relative overflow-hidden mb-8">
@@ -42,9 +47,23 @@ const ChildSelector: React.FC<ChildSelectorProps> = ({ selectedChild, onSelect }
             <div className={`relative w-16 h-16 rounded-full p-0.5 border-2 transition-all ${
               selectedChild?.id === child.id ? 'border-indigo-500' : 'border-transparent'
             }`}>
-              <img src={child.avatar} alt={child.name} className="w-full h-full rounded-full object-cover" />
+              <div className="w-full h-full rounded-full overflow-hidden bg-slate-100 shadow-inner">
+                {!imageErrors[child.id] ? (
+                  <img 
+                    src={child.avatar} 
+                    alt={child.name} 
+                    className="w-full h-full object-cover"
+                    onError={() => handleImageError(child.id)}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-slate-400 font-bold text-lg">
+                    {child.name.substring(0, 2).toUpperCase()}
+                  </div>
+                )}
+              </div>
+              
               {selectedChild?.id === child.id && (
-                <div className="absolute -top-1 -right-1 bg-indigo-500 text-white rounded-full p-0.5 border-2 border-white shadow-sm">
+                <div className="absolute -top-1 -right-1 bg-indigo-500 text-white rounded-full p-0.5 border-2 border-white shadow-sm z-10">
                   <Star size={12} fill="white" />
                 </div>
               )}

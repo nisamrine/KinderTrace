@@ -9,10 +9,30 @@ export const COLORS = {
 };
 
 export const MOCK_CHILDREN: Child[] = [
-  { id: '1', name: 'Liam Smith', age: '2y 4m', section: 'Toddlers A', avatar: 'https://picsum.photos/seed/liam/200' },
-  { id: '2', name: 'Emma Johnson', age: '1y 8m', section: 'Infants B', avatar: 'https://picsum.photos/seed/emma/200' },
-  { id: '3', name: 'Noah Williams', age: '3y 1m', section: 'Preschool C', avatar: 'https://picsum.photos/seed/noah/200' },
-  { id: '4', name: 'Olivia Brown', age: '2y 11m', section: 'Toddlers A', avatar: 'https://picsum.photos/seed/olivia/200' },
+  { 
+    id: '001', 
+    name: 'Rita Fora', 
+    age: 'Baby', 
+    section: 'Baby', 
+    avatar: 'data/media/001_rita_fora_portrait.jpg',
+    visualDescription: 'A cute black baby girl with voluminous afro hair, wearing a white t-shirt, smiling broadly.'
+  },
+  { 
+    id: '002', 
+    name: 'Liam Rey', 
+    age: 'Toddler', 
+    section: 'Middle', 
+    avatar: 'data/media/002_liam_rey_portrait.jpg',
+    visualDescription: 'A caucasian toddler boy with messy blonde hair and green eyes, wearing a striped black and white shirt and a dark bandana bib.'
+  },
+  { 
+    id: '003', 
+    name: 'Iyad Mimi', 
+    age: 'Toddler', 
+    section: 'Middle', 
+    avatar: 'data/media/003_iyad_mimi_portrait.jpg',
+    visualDescription: 'A toddler boy with short light brown hair and brown eyes, wearing a blue sleeveless top, looking calm.'
+  },
 ];
 
 export const APP_LOGO = (

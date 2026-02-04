@@ -16,31 +16,32 @@ export const generateMonthlyStorybook = async (childName: string, month: string,
   
   Return the output as a JSON array of 5 objects.`;
 
-  const response = await ai.models.generateContent({
-    model: 'gemini-3-pro-preview',
-    contents: prompt,
-    config: {
-      temperature: 0.9,
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.ARRAY,
-        items: {
-          type: Type.OBJECT,
-          properties: {
-            text: { type: Type.STRING },
-            imagePrompt: { type: Type.STRING },
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-pro-preview',
+      contents: prompt,
+      config: {
+        temperature: 0.9,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              text: { type: Type.STRING },
+              imagePrompt: { type: Type.STRING },
+            },
+            required: ["text", "imagePrompt"],
           },
-          required: ["text", "imagePrompt"],
         },
       },
-    },
-  });
+    });
 
-  try {
-    const pages: StoryPage[] = JSON.parse(response.text);
+    const pages: StoryPage[] = JSON.parse(response.text || "[]");
     return pages.slice(0, 5);
   } catch (e) {
-    console.error("Failed to parse storybook JSON", e);
+    console.error("Failed to generate storybook text", e);
+    // Fallback content in case of error
     return [
       { text: `Today was a magical start for ${childName}.`, imagePrompt: "A happy child playing with blocks" },
       { text: `${childName} discovered the joy of sharing.`, imagePrompt: "Children sharing toys" },
@@ -51,25 +52,84 @@ export const generateMonthlyStorybook = async (childName: string, month: string,
   }
 };
 
-export const generateStoryImage = async (prompt: string) => {
-  const ai = getAI();
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash-image',
-    contents: {
-      parts: [
-        { text: `A vibrant, high-quality Manga-style caricature illustration for a children's book. Whimsical daycare setting. Scene: ${prompt}. Clean lines, soft watercolor textures, professional digital art, magical atmosphere.` }
-      ]
-    },
-    config: {
-      imageConfig: {
-        aspectRatio: "1:1"
-      }
+// Helper to fetch local image and convert to Base64
+async function getBase64FromUrl(url: string): Promise<string | null> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.warn(`Failed to fetch image at ${url}: ${response.statusText}`);
+      return null;
     }
+    const blob = await response.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        // Remove data URL prefix (e.g., "data:image/jpeg;base64,")
+        const base64 = result.split(',')[1];
+        resolve(base64);
+      };
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.warn("Error converting image to base64, proceeding without reference image:", error);
+    return null;
+  }
+}
+
+export const generateStoryImage = async (prompt: string, referenceImageUrl?: string, visualDescription?: string) => {
+  const ai = getAI();
+  const parts: any[] = [];
+
+  // If a reference image is provided (the child's avatar), include it to guide the character generation
+  if (referenceImageUrl) {
+    const base64Data = await getBase64FromUrl(referenceImageUrl);
+    if (base64Data) {
+      parts.push({
+        inlineData: {
+          mimeType: 'image/jpeg', 
+          data: base64Data
+        }
+      });
+    } else {
+        console.warn("Proceeding with image generation without reference image due to fetch failure.");
+    }
+  }
+
+  // Add the text prompt
+  const characterPrompt = visualDescription 
+    ? `The main character is ${visualDescription}. Ensure the character in the illustration closely resembles this description and the provided reference image.`
+    : `The main character should look like the child in the provided reference image.`;
+
+  parts.push({
+    text: `Generate a high-quality Manga-style illustration for a children's book.
+    ${characterPrompt}
+    Scene: ${prompt}. 
+    Style: Soft watercolor textures, whimsical, professional digital art, expressive, magical atmosphere, consistent character design.`
   });
 
-  for (const part of response.candidates?.[0].content.parts || []) {
-    if (part.inlineData) {
-      return `data:image/png;base64,${part.inlineData.data}`;
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-pro-image-preview', // Leveraging Gemini 3 Pro for high-quality image generation with reference
+      contents: { parts },
+      config: {
+        imageConfig: {
+          aspectRatio: "1:1",
+          imageSize: "1K"
+        }
+      }
+    });
+
+    for (const part of response.candidates?.[0]?.content?.parts || []) {
+      if (part.inlineData) {
+        return `data:image/png;base64,${part.inlineData.data}`;
+      }
+    }
+  } catch (e: any) {
+    console.error("Image generation failed", e);
+    // If it's a permission denied error, log a specific message about billing/API key
+    if (e.message?.includes('403') || e.status === 'PERMISSION_DENIED') {
+        console.error("CRITICAL: 403 Permission Denied. Please ensure you have selected a valid API Key with billing enabled.");
     }
   }
   return null;

@@ -27,13 +27,18 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
     setLoadingStep('Writing the 5 chapters of magic...');
     
     try {
-      const mockObservations = `${selectedChild.name} loved the outdoor garden, painted a rainbow, learned about ladybugs, shared a snack with Emma, and had very peaceful nap times.`;
+      const mockObservations = `${selectedChild.name} loved the outdoor garden, painted a rainbow, learned about ladybugs, shared a snack with friends, and had very peaceful nap times.`;
       const generatedPages = await generateMonthlyStorybook(selectedChild.name, selectedMonth, mockObservations);
       
       const pagesWithImages = [...generatedPages];
       
-      setLoadingStep(`Painting Page 1...`);
-      const img1 = await generateStoryImage(pagesWithImages[0].imagePrompt);
+      setLoadingStep(`Painting Page 1 with ${selectedChild.name}'s avatar...`);
+      // Pass the child's avatar and visual description as reference
+      const img1 = await generateStoryImage(
+        pagesWithImages[0].imagePrompt, 
+        selectedChild.avatar,
+        selectedChild.visualDescription
+      );
       if (img1) pagesWithImages[0].imageUrl = img1;
       
       setPages(pagesWithImages);
@@ -47,12 +52,17 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
 
   useEffect(() => {
     const loadRemainingImages = async () => {
-      if (pages.length > 0) {
+      if (pages.length > 0 && selectedChild) {
         const updatedPages = [...pages];
         let changed = false;
         for (let i = 0; i < updatedPages.length; i++) {
           if (!updatedPages[i].imageUrl) {
-            const img = await generateStoryImage(updatedPages[i].imagePrompt);
+            // Pass the child's avatar and visual description as reference for consistency
+            const img = await generateStoryImage(
+              updatedPages[i].imagePrompt, 
+              selectedChild.avatar,
+              selectedChild.visualDescription
+            );
             if (img) {
               updatedPages[i].imageUrl = img;
               changed = true;
@@ -65,7 +75,7 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
     if (!isGenerating && pages.length > 0) {
       loadRemainingImages();
     }
-  }, [pages, isGenerating]);
+  }, [pages, isGenerating, selectedChild]);
 
   useEffect(() => {
     setPages([]);
