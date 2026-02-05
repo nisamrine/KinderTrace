@@ -2,44 +2,35 @@
 # KinderTrace AI - Product & Technical Documentation
 
 ## 1. Vision & Overview
-KinderTrace AI is a world-class pedagogical documentation platform designed for modern daycare centers. It utilizes an **Agentic AI Architecture** to transform raw classroom observations into structured developmental data, regulatory compliance reports, and whimsical parent-facing memory books.
+KinderTrace AI is an educational documentation platform designed for daycare centers. It uses **agentic AI architecture** to transform observations into structured data on child development, regulatory compliance reports, and memory albums for parents.
 
 ---
 
-## 2. Design System: "Whimsical Professionalism"
-- **Typography:** *Quicksand* — rounded, approachable, and highly legible.
-- **Palette:** 
-  - `Indigo (#4F46E5)`: Professionalism and trust.
-  - `Teal (#00A389)`: Health, growth, and pedagogical structure.
-  - `Orange (#FF5C00)`: Energy and creativity.
-- **UI Elements:**
-  - **Glassmorphism:** Using `backdrop-blur` for cards to create depth without clutter.
-  - **Rainbow Borders:** Applied to AI-generated content to signify "Machine Creativity."
-  - **Fun Shadows:** Soft, colored shadows that lift elements off the page.
+## 2. Design System:
 
 ---
 
 ## 3. Screen Breakdown & Functionalities
 
 ### 3.1. Authentication Portal
-- **UI:** A centered, glassmorphic login card with high-security branding.
-- **Function:** Restricts access to authorized daycare staff. Features a persistent "Authorized Personnel Only" badge to reinforce data privacy standards.
+- **User interface:**
+- **Function:** restricts access to authorized daycare staff.
 
-### 3.2. Observation Hub (Pulse Screen)
-- **Primary Interface:** The **Manual Logbook**, a structured form for recording Arrival/Departure, Activities, and Behaviors.
-- **Tag System:** Activity and Behavior tags are interactive. Users can add "Other" categories via a dashed-border input that immediately integrates into the UI.
-- **AI-Assisted Textareas:** 
-  - **Staff & Parent Notes:** Feature localized `Mic` buttons that trigger voice-to-text.
-  - **Transcription Label:** Subtle "AI will transcribe automatically" text reinforces that data is being synced to the central intelligence layer.
+### 3.2. Observation Center
+- **Main interface:** the **manual log**, a structured form for recording arrivals/departures, activities, and behaviors.
+- **Tag system:** Activity and behavior tags are interactive. Users can add "Other" categories via a dotted-border field that integrates seamlessly into the user interface.
+- **AI-assisted text fields:**
+- **Staff and parent notes:** Localized "Mic" buttons that trigger voice-to-text conversion.
+- **Transcription label:** "AI will automatically transcribe" the data.
 
-### 3.3. Insights Dashboard (The "Brain")
-- **Dynamic Professional Actions:**
-  - **Pedagogical Recommendations:** An interactive AI consultant. Powered by **Gemini 3 Flash**, it analyzes current child metrics (sleep, mood, presence) to generate 3 actionable pedagogical tips for staff.
-- **Key Performance Widgets:**
-  - **Radial Sleep Tracker:** Visualizes nap duration against individual child goals.
-  - **Mood Line Chart:** Tracks "Calm", "Energetic", and "Fussy" patterns over the week.
-  - **Presence Hours Bar Chart:** Calculates and displays daily check-in/out duration, weekly totals, and attendance trends.
-- **Agentic Synthesis Terminal:** A dark-mode console displaying the "Thinking Process" of the Analyst, Compliance, and Storage agents.
+### 3.3. Insights Dashboard (the "brain")
+- **Dynamic professional actions:**
+  - **Educational recommendations:** an interactive AI consultant. Powered by **Gemini 3 Flash**, it analyzes the child's current indicators (sleep, mood, attendance) to generate three actionable educational recommendations for staff.
+- **Key performance widgets:**
+  - **Sleep tracking:** visualizes nap times against each child's individual goals.
+  - **Line graph of mood:** tracks "calm," "energetic," and "restless" trends throughout the week.
+  - **Bar chart of attendance hours:** calculates and displays daily arrival and departure times, weekly totals, and attendance trends.
+- **Educational summary:** AI-generated historical milestones.
 
 ### 3.4. Daily Storybook (Magic Screen)
 - **UI:** A whimsical, "storybook-style" layout with Manga-inspired illustrations.
