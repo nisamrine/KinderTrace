@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Share2, RefreshCw, Heart, BookOpen, Quote, ChevronLeft, ChevronRight, Calendar, User, ClipboardList, FileText, Download } from 'lucide-react';
 import { generateMonthlyStorybook, generateStoryImage } from '../services/geminiService';
-import { StoryPage, Child, Screen } from '../types';
+import { StoryPage, Child, Screen, DailyLog } from '../types';
 import ChildSelector from '../components/ChildSelector';
+import { fetchChildLogs } from '../services/dataService';
 
 interface StorybookScreenProps {
   selectedChild: Child | null;
@@ -14,26 +15,41 @@ interface StorybookScreenProps {
 const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSelectedChild, onNavigate }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pages, setPages] = useState<StoryPage[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState('March');
+  const [selectedMonth, setSelectedMonth] = useState('January');
   const [isGenerating, setIsGenerating] = useState(false);
   const [loadingStep, setLoadingStep] = useState('');
+  const [logs, setLogs] = useState<DailyLog[]>([]);
 
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+  useEffect(() => {
+    const loadLogs = async () => {
+      if (selectedChild) {
+        const data = await fetchChildLogs(selectedChild, selectedMonth);
+        setLogs(data);
+      }
+    };
+    loadLogs();
+  }, [selectedChild, selectedMonth]);
+
   const handleGenerate = async () => {
-    if (!selectedChild) return;
+    if (!selectedChild || logs.length === 0) return;
     setIsGenerating(true);
     setCurrentPage(0);
-    setLoadingStep('Writing the 5 chapters of magic...');
+    setLoadingStep('Reading 31 days of adventures...');
     
     try {
-      const mockObservations = `${selectedChild.name} loved the outdoor garden, painted a rainbow, learned about ladybugs, shared a snack with friends, and had very peaceful nap times.`;
-      const generatedPages = await generateMonthlyStorybook(selectedChild.name, selectedMonth, mockObservations);
+      // Synthesize real observations for the prompt
+      const realObservations = logs
+        .slice(0, 10) // Taking a sample of days to keep prompt efficient
+        .map(l => `On day ${l.date}, ${l.observations_professional}`)
+        .join(" ");
+
+      const generatedPages = await generateMonthlyStorybook(selectedChild.name, selectedMonth, realObservations);
       
       const pagesWithImages = [...generatedPages];
       
-      setLoadingStep(`Painting Page 1 with ${selectedChild.name}'s avatar...`);
-      // Pass the child's avatar and visual description as reference
+      setLoadingStep(`Painting Page 1 with ${selectedChild.name}'s character...`);
       const img1 = await generateStoryImage(
         pagesWithImages[0].imagePrompt, 
         selectedChild.avatar,
@@ -57,7 +73,6 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
         let changed = false;
         for (let i = 0; i < updatedPages.length; i++) {
           if (!updatedPages[i].imageUrl) {
-            // Pass the child's avatar and visual description as reference for consistency
             const img = await generateStoryImage(
               updatedPages[i].imagePrompt, 
               selectedChild.avatar,
@@ -100,8 +115,8 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                 <Calendar size={24} />
               </div>
               <div>
-                <h3 className="font-black text-slate-800 tracking-tight">Select Adventure Month</h3>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Identify the story's period</p>
+                <h3 className="font-black text-slate-800 tracking-tight">Select Story Period</h3>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{logs.length} days of data found</p>
               </div>
             </div>
             
@@ -115,11 +130,11 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
               </select>
               <button
                 onClick={handleGenerate}
-                disabled={isGenerating}
+                disabled={isGenerating || logs.length === 0}
                 className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-2xl font-black shadow-lg shadow-indigo-100 transition-all disabled:opacity-50 flex items-center space-x-2"
               >
                 {isGenerating ? <RefreshCw className="animate-spin" size={18} /> : <Sparkles size={18} />}
-                <span>{pages.length > 0 ? 'Regenerate' : 'Create Book'}</span>
+                <span>{pages.length > 0 ? 'Regenerate' : 'Generate From Logs'}</span>
               </button>
             </div>
           </section>
@@ -133,7 +148,7 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                  </div>
               </div>
               <div className="space-y-3">
-                <h2 className="text-3xl font-black text-slate-800 tracking-tight">Preparing the Digital Book</h2>
+                <h2 className="text-3xl font-black text-slate-800 tracking-tight">Synthesizing Pedagogical Logs</h2>
                 <p className="text-lg font-bold text-indigo-500 italic">{loadingStep}</p>
                 <p className="text-xs font-black text-slate-300 uppercase tracking-[0.3em] pt-4">Powered by Gemini 3 Pro</p>
               </div>
@@ -221,20 +236,6 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                   <span className="text-lg font-black">Share Full Month Story</span>
                 </button>
               </div>
-
-              {/* NEXT SECTION NAV BUTTON (Back to Start) */}
-              <div className="flex justify-center pt-8">
-                <button
-                  onClick={() => onNavigate('observations')}
-                  className="group relative flex items-center space-x-4 bg-white/80 backdrop-blur-sm border-2 border-blue-200 px-12 py-5 rounded-[2rem] text-blue-600 font-black text-xl hover:bg-blue-50 hover:border-blue-400 transition-all shadow-xl shadow-blue-100/50"
-                >
-                  <div className="bg-blue-100 p-2 rounded-xl group-hover:scale-110 transition-transform">
-                    <ClipboardList size={24} />
-                  </div>
-                  <span>Start New Observation</span>
-                  <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform" />
-                </button>
-              </div>
             </div>
           ) : (
             <div className="bg-white/90 backdrop-blur rounded-[3rem] p-20 border-2 border-dashed border-indigo-100 flex flex-col items-center justify-center text-center space-y-6">
@@ -242,24 +243,29 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                  <BookOpen size={48} />
                </div>
                <div className="space-y-2">
-                 <h3 className="text-2xl font-black text-slate-800">No Storybook Found</h3>
-                 <p className="text-slate-500 font-bold">Select a month above and let Gemini 3 Pro weave some magic for {selectedChild.name}!</p>
+                 <h3 className="text-2xl font-black text-slate-800">{logs.length > 0 ? 'Storybook Ready' : 'Data Sync Required'}</h3>
+                 <p className="text-slate-500 font-bold">
+                   {logs.length > 0 
+                     ? `We found ${logs.length} days of data for ${selectedChild.name}. Ready to weave some magic?` 
+                     : `No logs found for ${selectedMonth}. Please select a month with recorded data.`
+                   }
+                 </p>
                </div>
                
                <div className="space-y-8 w-full max-w-sm">
                  <button 
+                  disabled={logs.length === 0}
                   onClick={handleGenerate}
-                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 hover:scale-105 transition-all"
+                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 hover:scale-105 transition-all disabled:opacity-50 disabled:hover:scale-100"
                  >
                   Generate {selectedMonth} Book
                  </button>
 
-                 {/* EXPORT TO PDF FIELD (NEW - Based on mockup) */}
                  <div className="relative group">
                    <div className="absolute inset-0 bg-indigo-50 rounded-2xl border-2 border-dashed border-indigo-200 group-hover:border-indigo-400 transition-colors" />
                    <button className="relative w-full py-6 flex flex-col items-center justify-center space-y-2 text-indigo-400 group-hover:text-indigo-600 transition-colors">
                      <FileText size={24} />
-                     <span className="text-xs font-black uppercase tracking-[0.2em]">Export to PDF field</span>
+                     <span className="text-xs font-black uppercase tracking-[0.2em]">Archived Reports</span>
                    </button>
                  </div>
                </div>
@@ -274,12 +280,6 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
           <p className="font-black text-lg uppercase tracking-widest text-slate-400">Select a child to build a storybook</p>
         </div>
       )}
-
-      <div className="text-center pt-4">
-        <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.4em] bg-white inline-block px-10 py-3 rounded-full shadow-sm border border-slate-50">
-          KinderTrace AI • Fun Story Synthesis
-        </p>
-      </div>
     </div>
   );
 };
