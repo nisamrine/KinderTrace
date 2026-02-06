@@ -1,0 +1,808 @@
+[
+    {
+        "id": "001",
+        "date": "20260101",
+        "arrival_time": "08:20",
+        "departure_time": "16:30",
+        "weight_kg": 9.5,
+        "sleep": 2.6,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "calm",
+            "observant"
+        ],
+        "activity": [
+            "free play"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita observed the environment quietly before engaging. She manipulated objects with care, showing secure exploration and emotional availability."
+    },
+    {
+        "id": "001",
+        "date": "20260102",
+        "arrival_time": "07:45",
+        "departure_time": "17:10",
+        "weight_kg": 9.5,
+        "sleep": 1.9,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "reserved",
+            "sensitive"
+        ],
+        "activity": [
+            "sensory baskets"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "Slept less than usual.",
+        "observations_professional": "Rita explored textures slowly, repeatedly rubbing fabrics between her fingers. This sensory focus supported her regulation throughout the morning."
+    },
+    {
+        "id": "001",
+        "date": "20260103",
+        "arrival_time": "08:10",
+        "departure_time": "16:00",
+        "weight_kg": 9.51,
+        "sleep": 3.1,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "joyful",
+            "engaged"
+        ],
+        "activity": [
+            "outdoor crawling"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Very good night.",
+        "observations_professional": "Rita crawled with confidence outdoors, stopping to examine small details. Her sustained attention reflected growing curiosity and motor assurance."
+    },
+    {
+        "id": "001",
+        "date": "20260104",
+        "arrival_time": "08:35",
+        "departure_time": "15:45",
+        "weight_kg": 9.51,
+        "sleep": 2.2,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "focused",
+            "persistent"
+        ],
+        "activity": [
+            "stacking blocks"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita stacked blocks with increasing precision. When towers fell, she restarted calmly, demonstrating persistence and emotional control."
+    },
+    {
+        "id": "001",
+        "date": "20260105",
+        "arrival_time": "07:55",
+        "departure_time": "17:20",
+        "weight_kg": 9.52,
+        "sleep": 1.7,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "tired",
+            "clingy"
+        ],
+        "activity": [
+            "soft mat play"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Late bedtime.",
+        "observations_professional": "Rita sought proximity and calm play. Gentle movements on the mat helped her regain emotional security."
+    },
+    {
+        "id": "001",
+        "date": "20260106",
+        "arrival_time": "08:15",
+        "departure_time": "16:40",
+        "weight_kg": 9.52,
+        "sleep": 2.8,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "curious",
+            "regulated"
+        ],
+        "activity": [
+            "water play"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita poured water repeatedly, adjusting wrist movements. She appeared deeply engaged, showing fine motor coordination and sensory pleasure."
+    },
+    {
+        "id": "001",
+        "date": "20260107",
+        "arrival_time": "08:00",
+        "departure_time": "17:00",
+        "weight_kg": 9.53,
+        "sleep": 2.4,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "attentive",
+            "calm"
+        ],
+        "activity": [
+            "story corner"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita remained seated for the full story, turning pages carefully and vocalizing softly, demonstrating sustained attention."
+    },
+    {
+        "id": "001",
+        "date": "20260108",
+        "arrival_time": "07:40",
+        "departure_time": "17:30",
+        "weight_kg": 9.53,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "confident",
+            "expressive"
+        ],
+        "activity": [
+            "music and movement"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Great sleep.",
+        "observations_professional": "Rita swayed rhythmically and clapped independently, showing body awareness and enjoyment of shared movement."
+    },
+    {
+        "id": "001",
+        "date": "20260109",
+        "arrival_time": "08:30",
+        "departure_time": "16:10",
+        "weight_kg": 9.54,
+        "sleep": 2.1,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "observant",
+            "independent"
+        ],
+        "activity": [
+            "object transfer"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita transferred objects between containers with controlled grip, demonstrating refined hand-eye coordination."
+    },
+    {
+        "id": "001",
+        "date": "20260110",
+        "arrival_time": "08:05",
+        "departure_time": "16:25",
+        "weight_kg": 9.54,
+        "sleep": 1.8,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "sensitive",
+            "quiet"
+        ],
+        "activity": [
+            "sensory bottles"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night.",
+        "observations_professional": "Rita shook sensory bottles slowly, watching the contents settle. This visual focus supported calming."
+    },
+    {
+        "id": "001",
+        "date": "20260111",
+        "arrival_time": "08:10",
+        "departure_time": "16:30",
+        "weight_kg": 9.55,
+        "sleep": 2.9,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "joyful",
+            "secure"
+        ],
+        "activity": [
+            "outdoor walking"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita walked short distances independently, pausing to regain balance, showing growing confidence."
+    },
+    {
+        "id": "001",
+        "date": "20260112",
+        "arrival_time": "07:55",
+        "departure_time": "17:15",
+        "weight_kg": 9.55,
+        "sleep": 2.3,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "focused",
+            "persistent"
+        ],
+        "activity": [
+            "shape sorting"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita attempted several shapes before success, maintaining focus and adapting strategies."
+    },
+    {
+        "id": "001",
+        "date": "20260113",
+        "arrival_time": "08:20",
+        "departure_time": "16:00",
+        "weight_kg": 9.56,
+        "sleep": 1.6,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "fatigued",
+            "clingy"
+        ],
+        "activity": [
+            "quiet corner"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Very early wake up.",
+        "observations_professional": "Rita stayed close to adults and engaged in calm observation, prioritizing emotional security."
+    },
+    {
+        "id": "001",
+        "date": "20260114",
+        "arrival_time": "08:00",
+        "departure_time": "17:00",
+        "weight_kg": 9.56,
+        "sleep": 3.2,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "confident",
+            "engaged"
+        ],
+        "activity": [
+            "climbing cushions"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Excellent sleep.",
+        "observations_professional": "Rita climbed and descended cushions with deliberate movements, testing balance safely."
+    },
+    {
+        "id": "001",
+        "date": "20260115",
+        "arrival_time": "08:25",
+        "departure_time": "16:15",
+        "weight_kg": 9.57,
+        "sleep": 2.4,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "apple"
+        ],
+        "behavior": [
+            "attentive",
+            "calm"
+        ],
+        "activity": [
+            "picture books"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita pointed to images and babbled softly, showing emerging expressive intent."
+    },
+    {
+        "id": "001",
+        "date": "20260116",
+        "arrival_time": "07:50",
+        "departure_time": "17:25",
+        "weight_kg": 9.57,
+        "sleep": 1.9,
+        "appetite": "ate little",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "sensitive",
+            "reserved"
+        ],
+        "activity": [
+            "sensory mats"
+        ],
+        "stool_count": 1,
+        "stool_state": "hard",
+        "observations_parent": "Late bedtime.",
+        "observations_professional": "Rita explored textured mats slowly, using hands and feet to regulate sensory input."
+    },
+    {
+        "id": "001",
+        "date": "20260117",
+        "arrival_time": "08:10",
+        "departure_time": "16:35",
+        "weight_kg": 9.58,
+        "sleep": 2.7,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "joyful",
+            "balanced"
+        ],
+        "activity": [
+            "ball rolling"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita rolled the ball back and forth, adjusting force and anticipating movement."
+    },
+    {
+        "id": "001",
+        "date": "20260118",
+        "arrival_time": "08:40",
+        "departure_time": "15:50",
+        "weight_kg": 9.58,
+        "sleep": 2.2,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "independent",
+            "focused"
+        ],
+        "activity": [
+            "free exploration"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita chose activities independently, transitioning smoothly between them."
+    },
+    {
+        "id": "001",
+        "date": "20260119",
+        "arrival_time": "07:45",
+        "departure_time": "17:30",
+        "weight_kg": 9.59,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "secure",
+            "content"
+        ],
+        "activity": [
+            "outdoor play"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Very good sleep.",
+        "observations_professional": "Rita explored outdoors confidently, returning to adults for brief reassurance before continuing."
+    },
+    {
+        "id": "001",
+        "date": "20260120",
+        "arrival_time": "08:20",
+        "departure_time": "16:05",
+        "weight_kg": 9.59,
+        "sleep": 1.8,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "tired",
+            "quiet"
+        ],
+        "activity": [
+            "soft blocks"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night.",
+        "observations_professional": "Rita stacked soft blocks slowly, stopping often to rest, respecting her own limits."
+    },
+    {
+        "id": "001",
+        "date": "20260121",
+        "arrival_time": "08:00",
+        "departure_time": "17:00",
+        "weight_kg": 9.6,
+        "sleep": 2.6,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "focused",
+            "persistent"
+        ],
+        "activity": [
+            "peg boards"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita aligned pegs carefully, refining grip and precision with each attempt."
+    },
+    {
+        "id": "001",
+        "date": "20260122",
+        "arrival_time": "07:40",
+        "departure_time": "17:30",
+        "weight_kg": 9.6,
+        "sleep": 3.3,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "confident",
+            "expressive"
+        ],
+        "activity": [
+            "dance scarves"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Great sleep.",
+        "observations_professional": "Rita waved scarves with broad arm movements, expressing joy through movement."
+    },
+    {
+        "id": "001",
+        "date": "20260123",
+        "arrival_time": "08:30",
+        "departure_time": "16:15",
+        "weight_kg": 9.61,
+        "sleep": 2.1,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "calm",
+            "attentive"
+        ],
+        "activity": [
+            "story gestures"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita imitated simple gestures during stories, demonstrating comprehension and engagement."
+    },
+    {
+        "id": "001",
+        "date": "20260124",
+        "arrival_time": "08:10",
+        "departure_time": "16:50",
+        "weight_kg": 9.61,
+        "sleep": 1.9,
+        "appetite": "ate little",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "fatigued",
+            "quiet"
+        ],
+        "activity": [
+            "floor puzzles"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Late bedtime.",
+        "observations_professional": "Rita engaged briefly with puzzles, then chose rest, showing awareness of fatigue."
+    },
+    {
+        "id": "001",
+        "date": "20260125",
+        "arrival_time": "07:55",
+        "departure_time": "17:15",
+        "weight_kg": 9.62,
+        "sleep": 2.9,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "energetic",
+            "regulated"
+        ],
+        "activity": [
+            "climbing ramp"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita climbed the ramp steadily, coordinating hands and feet with confidence."
+    },
+    {
+        "id": "001",
+        "date": "20260126",
+        "arrival_time": "08:35",
+        "departure_time": "15:45",
+        "weight_kg": 9.62,
+        "sleep": 2.3,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "independent",
+            "focused"
+        ],
+        "activity": [
+            "free choice play"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita independently selected activities and stayed engaged for extended periods."
+    },
+    {
+        "id": "001",
+        "date": "20260127",
+        "arrival_time": "08:00",
+        "departure_time": "17:20",
+        "weight_kg": 9.63,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "joyful",
+            "secure"
+        ],
+        "activity": [
+            "outdoor walking"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Very good sleep.",
+        "observations_professional": "Rita walked longer distances with minimal support, demonstrating growing autonomy."
+    },
+    {
+        "id": "001",
+        "date": "20260128",
+        "arrival_time": "08:25",
+        "departure_time": "16:10",
+        "weight_kg": 9.63,
+        "sleep": 2.0,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "apple"
+        ],
+        "behavior": [
+            "attentive",
+            "cooperative"
+        ],
+        "activity": [
+            "group songs"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita watched peers closely before joining group songs, timing her participation thoughtfully."
+    },
+    {
+        "id": "001",
+        "date": "20260129",
+        "arrival_time": "07:45",
+        "departure_time": "17:30",
+        "weight_kg": 9.64,
+        "sleep": 1.6,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "sensitive",
+            "quiet"
+        ],
+        "activity": [
+            "sensory balls"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night.",
+        "observations_professional": "Rita squeezed sensory balls repeatedly, using tactile input to regulate."
+    },
+    {
+        "id": "001",
+        "date": "20260130",
+        "arrival_time": "08:15",
+        "departure_time": "16:40",
+        "weight_kg": 9.64,
+        "sleep": 2.7,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "focused",
+            "balanced"
+        ],
+        "activity": [
+            "balance cushions"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita adjusted posture carefully on cushions, demonstrating balance and concentration."
+    },
+    {
+        "id": "001",
+        "date": "20260131",
+        "arrival_time": "08:05",
+        "departure_time": "16:55",
+        "weight_kg": 9.65,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "secure",
+            "content"
+        ],
+        "activity": [
+            "free outdoor play"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Rita ended the month with confident exploration, emotional security, and sustained engagement across activities."
+    }
+]
