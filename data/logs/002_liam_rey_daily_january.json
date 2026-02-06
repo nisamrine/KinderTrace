@@ -1,0 +1,810 @@
+[
+    {
+        "id": "002",
+        "date": "20260101",
+        "arrival_time": "07:45",
+        "departure_time": "17:20",
+        "weight_kg": 10.0,
+        "sleep": 1.8,
+        "appetite": "wanted seconds",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "energetic",
+            "impulsive",
+            "joyful"
+        ],
+        "activity": [
+            "outdoor running",
+            "climbing frame"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam arrived with high physical energy and immediately sought outdoor movement. He ran repeatedly between structures, gradually adjusting his speed after several falls. Through repetition, he refined balance and showed pleasure in mastering his body in space."
+    },
+    {
+        "id": "002",
+        "date": "20260102",
+        "arrival_time": "08:10",
+        "departure_time": "16:40",
+        "weight_kg": 10.0,
+        "sleep": 1.2,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "tired",
+            "reactive"
+        ],
+        "activity": [
+            "ball rolling"
+        ],
+        "stool_count": 1,
+        "stool_state": "hard",
+        "observations_parent": "Very short night, woke up early.",
+        "observations_professional": "Liam showed signs of fatigue and had difficulty waiting his turn. He calmed himself through repetitive ball rolling, gradually slowing his movements and regaining emotional balance."
+    },
+    {
+        "id": "002",
+        "date": "20260103",
+        "arrival_time": "07:50",
+        "departure_time": "17:30",
+        "weight_kg": 10.0,
+        "sleep": 2.6,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "confident",
+            "engaged"
+        ],
+        "activity": [
+            "movement circuit"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Slept much better.",
+        "observations_professional": "Well-rested, Liam engaged fully in the movement circuit. He repeated jumps to improve landing stability and adjusted his posture independently, showing growing body awareness."
+    },
+    {
+        "id": "002",
+        "date": "20260104",
+        "arrival_time": "08:30",
+        "departure_time": "15:50",
+        "weight_kg": 10.01,
+        "sleep": 2.1,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "curious",
+            "active"
+        ],
+        "activity": [
+            "push toys"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam pushed heavy toys across the room, experimenting with force and direction. He paused to readjust his grip when resistance increased, demonstrating problem-solving through movement."
+    },
+    {
+        "id": "002",
+        "date": "20260105",
+        "arrival_time": "07:40",
+        "departure_time": "17:10",
+        "weight_kg": 10.01,
+        "sleep": 1.5,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "frustrated",
+            "persistent"
+        ],
+        "activity": [
+            "block knocking"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Late bedtime, very excited.",
+        "observations_professional": "Liam expressed frustration when blocks fell repeatedly. After several attempts, he altered his approach by stacking fewer blocks, showing persistence and emerging self-regulation."
+    },
+    {
+        "id": "002",
+        "date": "20260106",
+        "arrival_time": "08:00",
+        "departure_time": "16:30",
+        "weight_kg": 10.02,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "joyful",
+            "regulated"
+        ],
+        "activity": [
+            "outdoor chasing games"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Great night of sleep.",
+        "observations_professional": "With strong energy regulation, Liam modulated his running speed during chasing games. He laughed often and stopped independently when tired, showing improved self-awareness."
+    },
+    {
+        "id": "002",
+        "date": "20260107",
+        "arrival_time": "08:20",
+        "departure_time": "16:00",
+        "weight_kg": 10.02,
+        "sleep": 2.4,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "pasta",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "attentive",
+            "cooperative"
+        ],
+        "activity": [
+            "group movement songs"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam followed movement songs attentively, adjusting gestures to match rhythm. He watched peers briefly before joining, showing growing coordination and group awareness."
+    },
+    {
+        "id": "002",
+        "date": "20260108",
+        "arrival_time": "07:55",
+        "departure_time": "17:25",
+        "weight_kg": 10.03,
+        "sleep": 1.6,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "sensitive",
+            "restless"
+        ],
+        "activity": [
+            "tunnel crawling"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Woke up very early.",
+        "observations_professional": "Liam sought continuous movement and crawled repeatedly through the tunnel. This deep-pressure activity appeared to support emotional regulation and helped him settle later."
+    },
+    {
+        "id": "002",
+        "date": "20260109",
+        "arrival_time": "08:30",
+        "departure_time": "16:10",
+        "weight_kg": 10.03,
+        "sleep": 2.2,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "active",
+            "curious"
+        ],
+        "activity": [
+            "push carts"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam pushed carts across different surfaces, adjusting force depending on resistance. He repeated the activity with intention, showing growing body awareness and coordination."
+    },
+    {
+        "id": "002",
+        "date": "20260110",
+        "arrival_time": "07:50",
+        "departure_time": "17:15",
+        "weight_kg": 10.04,
+        "sleep": 1.4,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "fatigued",
+            "reactive"
+        ],
+        "activity": [
+            "ball bouncing"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night, very active evening.",
+        "observations_professional": "Liam had difficulty waiting but used ball bouncing to release tension. Over time, his movements slowed and his breathing settled, supporting emotional regulation."
+    },
+    {
+        "id": "002",
+        "date": "20260111",
+        "arrival_time": "08:05",
+        "departure_time": "16:30",
+        "weight_kg": 10.04,
+        "sleep": 2.9,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "joyful",
+            "regulated"
+        ],
+        "activity": [
+            "outdoor climbing"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Great sleep.",
+        "observations_professional": "Liam climbed confidently, testing limits while remaining attentive to safety. He paused before jumping, showing improved impulse control."
+    },
+    {
+        "id": "002",
+        "date": "20260112",
+        "arrival_time": "08:40",
+        "departure_time": "15:50",
+        "weight_kg": 10.05,
+        "sleep": 2.0,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "focused",
+            "persistent"
+        ],
+        "activity": [
+            "obstacle course"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam repeated the obstacle course several times, refining each movement. When he stumbled, he restarted calmly, demonstrating perseverance."
+    },
+    {
+        "id": "002",
+        "date": "20260113",
+        "arrival_time": "07:45",
+        "departure_time": "17:30",
+        "weight_kg": 10.05,
+        "sleep": 1.6,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "restless",
+            "sensitive"
+        ],
+        "activity": [
+            "tunnel crawling"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Woke up very early.",
+        "observations_professional": "Liam sought deep-pressure movement through repeated tunnel crawling. This supported calming and allowed smoother transitions later."
+    },
+    {
+        "id": "002",
+        "date": "20260114",
+        "arrival_time": "08:15",
+        "departure_time": "16:45",
+        "weight_kg": 10.06,
+        "sleep": 3.1,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "confident",
+            "engaged"
+        ],
+        "activity": [
+            "running games"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Very good sleep.",
+        "observations_professional": "Liam regulated his speed during group running games and stopped independently when tired, showing improved self-monitoring."
+    },
+    {
+        "id": "002",
+        "date": "20260115",
+        "arrival_time": "08:25",
+        "departure_time": "16:00",
+        "weight_kg": 10.06,
+        "sleep": 2.4,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "apple"
+        ],
+        "behavior": [
+            "cooperative",
+            "attentive"
+        ],
+        "activity": [
+            "movement songs"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam followed movement songs attentively, adjusting gestures to rhythm and observing peers before joining fully."
+    },
+    {
+        "id": "002",
+        "date": "20260116",
+        "arrival_time": "07:55",
+        "departure_time": "17:10",
+        "weight_kg": 10.07,
+        "sleep": 1.9,
+        "appetite": "ate little",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "fatigued",
+            "seeking movement"
+        ],
+        "activity": [
+            "push toys"
+        ],
+        "stool_count": 1,
+        "stool_state": "hard",
+        "observations_parent": "Late bedtime.",
+        "observations_professional": "Liam used pushing activities to organize his energy. Repetitive effort supported emotional regulation and focus."
+    },
+    {
+        "id": "002",
+        "date": "20260117",
+        "arrival_time": "08:10",
+        "departure_time": "16:20",
+        "weight_kg": 10.07,
+        "sleep": 2.7,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "calm",
+            "confident"
+        ],
+        "activity": [
+            "balance beams"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam crossed balance beams slowly, arms extended for stability. He repeated the task until satisfied, demonstrating control and concentration."
+    },
+    {
+        "id": "002",
+        "date": "20260118",
+        "arrival_time": "08:45",
+        "departure_time": "15:40",
+        "weight_kg": 10.08,
+        "sleep": 2.3,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "observant",
+            "independent"
+        ],
+        "activity": [
+            "free movement"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam explored the space freely, choosing when to run or rest. He demonstrated growing autonomy in regulating his physical engagement."
+    },
+    {
+        "id": "002",
+        "date": "20260119",
+        "arrival_time": "07:50",
+        "departure_time": "17:25",
+        "weight_kg": 10.08,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "joyful",
+            "regulated"
+        ],
+        "activity": [
+            "outdoor play"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Slept very well.",
+        "observations_professional": "Liam showed fluid movement and clear enjoyment outdoors. He adapted his intensity based on space and peers."
+    },
+    {
+        "id": "002",
+        "date": "20260120",
+        "arrival_time": "08:20",
+        "departure_time": "16:00",
+        "weight_kg": 10.09,
+        "sleep": 1.7,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "sensitive",
+            "restless"
+        ],
+        "activity": [
+            "rolling mats"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night.",
+        "observations_professional": "Liam rolled mats repeatedly, using deep-pressure input to calm himself before joining group activities."
+    },
+    {
+        "id": "002",
+        "date": "20260121",
+        "arrival_time": "08:00",
+        "departure_time": "17:00",
+        "weight_kg": 10.09,
+        "sleep": 2.5,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "focused",
+            "persistent"
+        ],
+        "activity": [
+            "jumping games"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam practiced jumping with increasing control, bending knees before takeoff and landing more softly."
+    },
+    {
+        "id": "002",
+        "date": "20260122",
+        "arrival_time": "07:40",
+        "departure_time": "17:30",
+        "weight_kg": 10.1,
+        "sleep": 3.2,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "confident",
+            "leader"
+        ],
+        "activity": [
+            "group chasing games"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Great sleep.",
+        "observations_professional": "Liam initiated group movement games and adjusted pace to include others, showing emerging leadership through physical play."
+    },
+    {
+        "id": "002",
+        "date": "20260123",
+        "arrival_time": "08:30",
+        "departure_time": "16:10",
+        "weight_kg": 10.1,
+        "sleep": 2.1,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "calm",
+            "attentive"
+        ],
+        "activity": [
+            "stretching"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam followed guided stretching, slowing his movements and focusing on body awareness."
+    },
+    {
+        "id": "002",
+        "date": "20260124",
+        "arrival_time": "08:10",
+        "departure_time": "16:50",
+        "weight_kg": 10.11,
+        "sleep": 1.8,
+        "appetite": "ate little",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "fatigued",
+            "quiet"
+        ],
+        "activity": [
+            "soft play"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Late bedtime.",
+        "observations_professional": "Liam chose softer activities and rested intermittently, showing awareness of his limits."
+    },
+    {
+        "id": "002",
+        "date": "20260125",
+        "arrival_time": "07:55",
+        "departure_time": "17:15",
+        "weight_kg": 10.11,
+        "sleep": 2.8,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "energetic",
+            "regulated"
+        ],
+        "activity": [
+            "climbing wall"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam climbed steadily, planning each movement before shifting weight, showing improved coordination."
+    },
+    {
+        "id": "002",
+        "date": "20260126",
+        "arrival_time": "08:35",
+        "departure_time": "15:45",
+        "weight_kg": 10.12,
+        "sleep": 2.3,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "independent",
+            "focused"
+        ],
+        "activity": [
+            "free movement choice"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam independently alternated between active and calm movement, demonstrating growing self-regulation."
+    },
+    {
+        "id": "002",
+        "date": "20260127",
+        "arrival_time": "08:00",
+        "departure_time": "17:20",
+        "weight_kg": 10.12,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "joyful",
+            "confident"
+        ],
+        "activity": [
+            "outdoor running"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Slept very well.",
+        "observations_professional": "Liam ran with fluid coordination and stopped independently when tired, showing strong body awareness."
+    },
+    {
+        "id": "002",
+        "date": "20260128",
+        "arrival_time": "08:25",
+        "departure_time": "16:10",
+        "weight_kg": 10.13,
+        "sleep": 2.0,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "carrots",
+            "apple"
+        ],
+        "behavior": [
+            "attentive",
+            "cooperative"
+        ],
+        "activity": [
+            "movement circle"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam followed group movement cues and adjusted timing to match others, supporting social coordination."
+    },
+    {
+        "id": "002",
+        "date": "20260129",
+        "arrival_time": "07:45",
+        "departure_time": "17:30",
+        "weight_kg": 10.13,
+        "sleep": 1.5,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "sensitive",
+            "restless"
+        ],
+        "activity": [
+            "rolling balls"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night.",
+        "observations_professional": "Liam used repetitive ball rolling to regain calm and prepare for group participation."
+    },
+    {
+        "id": "002",
+        "date": "20260130",
+        "arrival_time": "08:15",
+        "departure_time": "16:40",
+        "weight_kg": 10.14,
+        "sleep": 2.6,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "focused",
+            "balanced"
+        ],
+        "activity": [
+            "balance games"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam demonstrated controlled balance and intentional movement, adjusting posture with precision."
+    },
+    {
+        "id": "002",
+        "date": "20260131",
+        "arrival_time": "08:05",
+        "departure_time": "16:55",
+        "weight_kg": 10.15,
+        "sleep": 2.9,
+        "appetite": "wanted seconds",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "secure",
+            "content"
+        ],
+        "activity": [
+            "free outdoor play"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Liam moved confidently between activities, demonstrating emotional security and autonomy. He ended the month with balanced energy and intentional physical engagement."
+    }
+]

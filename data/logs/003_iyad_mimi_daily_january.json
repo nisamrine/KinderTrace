@@ -1,0 +1,820 @@
+[
+    {
+        "id": "003",
+        "date": "20260101",
+        "arrival_time": "08:35",
+        "departure_time": "16:20",
+        "weight_kg": 11.2,
+        "sleep": 2.8,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "rice",
+            "yogurt",
+            "mango"
+        ],
+        "behavior": [
+            "empathetic",
+            "curious",
+            "calm"
+        ],
+        "activity": [
+            "puzzle building",
+            "storytelling"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad arrived calm and observant. He chose a wooden puzzle and carefully rotated each piece, adjusting his grip when it didn\u2019t fit. He appeared deeply satisfied when completing it, running his fingers along the edges before moving on to telling a short story about the picture."
+    },
+    {
+        "id": "003",
+        "date": "20260102",
+        "arrival_time": "08:20",
+        "departure_time": "16:10",
+        "weight_kg": 11.2,
+        "sleep": 1.9,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "thoughtful",
+            "slightly tired"
+        ],
+        "activity": [
+            "book browsing"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Didn\u2019t sleep well, woke up twice.",
+        "observations_professional": "Iyad moved more slowly today and sought quieter spaces. He flipped pages deliberately, pausing to trace images with his finger. When he became briefly fussy, he regulated himself by returning to a familiar book, settling his breathing and posture."
+    },
+    {
+        "id": "003",
+        "date": "20260103",
+        "arrival_time": "08:50",
+        "departure_time": "16:40",
+        "weight_kg": 11.2,
+        "sleep": 3.2,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "confident",
+            "leader",
+            "engaged"
+        ],
+        "activity": [
+            "group storytelling",
+            "puppet play"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "Slept very well.",
+        "observations_professional": "Well-rested, Iyad confidently initiated a puppet story. He coordinated hand movements smoothly and adjusted his voice for different characters. When another child joined, Iyad paused, made eye contact, and restructured the story to include them, showing flexible thinking."
+    },
+    {
+        "id": "003",
+        "date": "20260104",
+        "arrival_time": "09:05",
+        "departure_time": "15:45",
+        "weight_kg": 11.2,
+        "sleep": 2.4,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "empathetic",
+            "focused"
+        ],
+        "activity": [
+            "bead threading"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad spent extended time threading beads, carefully aligning holes and adjusting finger pressure. When a bead slipped, he paused, took a breath, and resumed without frustration, showing growing emotional regulation through fine-motor focus."
+    },
+    {
+        "id": "003",
+        "date": "20260105",
+        "arrival_time": "08:10",
+        "departure_time": "17:10",
+        "weight_kg": 11.2,
+        "sleep": 1.5,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "mango"
+        ],
+        "behavior": [
+            "tired",
+            "sensitive"
+        ],
+        "activity": [
+            "quiet drawing"
+        ],
+        "stool_count": 2,
+        "stool_state": "hard",
+        "observations_parent": "Grandma visiting, late bedtime.",
+        "observations_professional": "Iyad appeared more sensitive to noise and chose to draw alone. He pressed lightly at first, then with more confidence, filling the page with repeated shapes. This repetitive motion seemed soothing and helped him regain calm."
+    },
+    {
+        "id": "003",
+        "date": "20260106",
+        "arrival_time": "08:40",
+        "departure_time": "16:25",
+        "weight_kg": 11.22,
+        "sleep": 2.6,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "carrots",
+            "rice",
+            "yogurt"
+        ],
+        "behavior": [
+            "curious",
+            "focused",
+            "calm"
+        ],
+        "activity": [
+            "sensory table",
+            "pouring play"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad explored the sensory table with sustained attention. He carefully poured lentils from one container to another, adjusting the angle of his wrist to control the flow. He repeated the action several times, appearing satisfied by the sound and rhythm, which supported his concentration and autonomy."
+    },
+    {
+        "id": "003",
+        "date": "20260107",
+        "arrival_time": "09:00",
+        "departure_time": "15:50",
+        "weight_kg": 11.22,
+        "sleep": 1.7,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "apple",
+            "yogurt"
+        ],
+        "behavior": [
+            "tired",
+            "observant"
+        ],
+        "activity": [
+            "book corner"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night, woke up early.",
+        "observations_professional": "Iyad was quieter today and sought the book corner. He turned pages slowly and lingered on familiar images. When he showed signs of fatigue, he leaned into this calm activity to self-soothe, demonstrating awareness of his own need for rest."
+    },
+    {
+        "id": "003",
+        "date": "20260108",
+        "arrival_time": "08:15",
+        "departure_time": "16:40",
+        "weight_kg": 11.23,
+        "sleep": 3.1,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "confident",
+            "expressive"
+        ],
+        "activity": [
+            "language circle",
+            "story sequencing"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "Slept very well.",
+        "observations_professional": "During language time, Iyad confidently retold a short story using picture cards. He ordered the images thoughtfully and used gestures to support his words. His pleasure in being understood reinforced his engagement and verbal expression."
+    },
+    {
+        "id": "003",
+        "date": "20260109",
+        "arrival_time": "08:55",
+        "departure_time": "17:20",
+        "weight_kg": 11.23,
+        "sleep": 2.3,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "empathetic",
+            "attentive"
+        ],
+        "activity": [
+            "free play",
+            "helping routines"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad showed strong social awareness during free play. He noticed another child struggling to put materials away and spontaneously offered help. He adjusted his pace to match the other child, showing empathy and cooperative intent."
+    },
+    {
+        "id": "003",
+        "date": "20260110",
+        "arrival_time": "08:30",
+        "departure_time": "16:00",
+        "weight_kg": 11.23,
+        "sleep": 2.0,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "mango"
+        ],
+        "behavior": [
+            "sensitive",
+            "persistent"
+        ],
+        "activity": [
+            "construction blocks"
+        ],
+        "stool_count": 1,
+        "stool_state": "hard",
+        "observations_parent": "Slight tummy discomfort this morning.",
+        "observations_professional": "Iyad approached block construction cautiously at first. When his structure collapsed, he paused, frowned briefly, then tried again using a wider base. His persistence allowed him to regain confidence and pride in the final result."
+    },
+    {
+        "id": "003",
+        "date": "20260111",
+        "arrival_time": "09:10",
+        "departure_time": "15:40",
+        "weight_kg": 11.24,
+        "sleep": 2.9,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "lentils",
+            "rice",
+            "apple"
+        ],
+        "behavior": [
+            "calm",
+            "engaged"
+        ],
+        "activity": [
+            "music exploration"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad explored musical instruments with curiosity. He experimented with volume and tempo, pausing to listen to the sounds he produced. This attentive listening supported both sensory discrimination and emotional regulation."
+    },
+    {
+        "id": "003",
+        "date": "20260112",
+        "arrival_time": "08:45",
+        "departure_time": "16:10",
+        "weight_kg": 11.24,
+        "sleep": 1.6,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "fatigued",
+            "seeking comfort"
+        ],
+        "activity": [
+            "soft mat play"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Late bedtime due to family visit.",
+        "observations_professional": "Iyad needed more reassurance today. He chose soft mat play and stayed physically close to the educator. Gentle tactile activities helped him relax and gradually re-engage with his environment."
+    },
+    {
+        "id": "003",
+        "date": "20260113",
+        "arrival_time": "08:20",
+        "departure_time": "17:00",
+        "weight_kg": 11.25,
+        "sleep": 3.3,
+        "appetite": "wanted seconds",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "energetic",
+            "leader"
+        ],
+        "activity": [
+            "role play",
+            "pretend kitchen"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Great night of sleep.",
+        "observations_professional": "Iyad took a leading role in pretend play, assigning roles and narrating actions. He adapted his language depending on who he addressed, showing flexibility and growing social communication skills."
+    },
+    {
+        "id": "003",
+        "date": "20260114",
+        "arrival_time": "09:00",
+        "departure_time": "16:30",
+        "weight_kg": 11.25,
+        "sleep": 2.4,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "pasta",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "reflective",
+            "independent"
+        ],
+        "activity": [
+            "drawing",
+            "color exploration"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad chose drawing independently and explored color mixing with intention. He observed the changes closely and adjusted pressure on the crayon, showing fine motor control and pleasure in experimentation."
+    },
+    {
+        "id": "003",
+        "date": "20260115",
+        "arrival_time": "08:35",
+        "departure_time": "16:50",
+        "weight_kg": 11.26,
+        "sleep": 2.7,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "rice",
+            "yogurt",
+            "mango"
+        ],
+        "behavior": [
+            "balanced",
+            "curious"
+        ],
+        "activity": [
+            "outdoor observation",
+            "nature walk"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "During the nature walk, Iyad moved at his own pace, stopping to observe textures on leaves and stones. He verbalized simple observations, linking sensory discovery with language development and sustained attention."
+    },
+    {
+        "id": "003",
+        "date": "20260116",
+        "arrival_time": "08:25",
+        "departure_time": "16:10",
+        "weight_kg": 11.26,
+        "sleep": 2.1,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "reserved",
+            "observant"
+        ],
+        "activity": [
+            "sorting objects"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad approached the sorting activity methodically, grouping objects by size rather than color. He paused often to observe his work, showing reflective thinking and a calm, self-directed pace."
+    },
+    {
+        "id": "003",
+        "date": "20260117",
+        "arrival_time": "08:50",
+        "departure_time": "15:45",
+        "weight_kg": 11.26,
+        "sleep": 1.8,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "mango"
+        ],
+        "behavior": [
+            "tired",
+            "seeking reassurance"
+        ],
+        "activity": [
+            "soft toy play"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Woke up very early.",
+        "observations_professional": "Iyad stayed close to familiar objects and engaged in gentle manipulation of soft toys. This repetitive tactile play appeared to comfort him and supported emotional security throughout the morning."
+    },
+    {
+        "id": "003",
+        "date": "20260118",
+        "arrival_time": "08:10",
+        "departure_time": "16:55",
+        "weight_kg": 11.27,
+        "sleep": 3.4,
+        "appetite": "wanted seconds",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "energetic",
+            "confident"
+        ],
+        "activity": [
+            "movement circuit",
+            "balance play"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Very good sleep.",
+        "observations_professional": "Iyad showed strong body awareness during balance activities. He adjusted his posture carefully and repeated movements to improve stability, expressing pride when succeeding independently."
+    },
+    {
+        "id": "003",
+        "date": "20260119",
+        "arrival_time": "09:05",
+        "departure_time": "16:20",
+        "weight_kg": 11.27,
+        "sleep": 2.6,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "pasta",
+            "yogurt",
+            "pear"
+        ],
+        "behavior": [
+            "empathetic",
+            "attentive"
+        ],
+        "activity": [
+            "shared reading"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "During shared reading, Iyad listened attentively and waited for pauses to comment. He showed awareness of others by adjusting his volume and pacing, demonstrating emerging social communication skills."
+    },
+    {
+        "id": "003",
+        "date": "20260120",
+        "arrival_time": "08:30",
+        "departure_time": "17:10",
+        "weight_kg": 11.27,
+        "sleep": 2.0,
+        "appetite": "ate all",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "persistent",
+            "focused"
+        ],
+        "activity": [
+            "peg board"
+        ],
+        "stool_count": 1,
+        "stool_state": "hard",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad worked persistently with the peg board, carefully aligning each piece. When resistance occurred, he modified his grip rather than abandoning the task, showing problem-solving through fine motor adjustment."
+    },
+    {
+        "id": "003",
+        "date": "20260121",
+        "arrival_time": "08:45",
+        "departure_time": "16:00",
+        "weight_kg": 11.28,
+        "sleep": 1.9,
+        "appetite": "ate little",
+        "food": [
+            "pasta",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "sensitive",
+            "quiet"
+        ],
+        "activity": [
+            "listening to music"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Slight cold starting.",
+        "observations_professional": "Iyad was more sensitive to stimulation and chose to sit quietly with music. He closed his eyes briefly and swayed gently, using auditory input to regulate his emotional state."
+    },
+    {
+        "id": "003",
+        "date": "20260122",
+        "arrival_time": "08:15",
+        "departure_time": "16:40",
+        "weight_kg": 11.28,
+        "sleep": 2.8,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "engaged",
+            "curious"
+        ],
+        "activity": [
+            "science table"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "At the science table, Iyad observed floating and sinking objects. He tested hypotheses by changing one object at a time, demonstrating early logical reasoning and sustained curiosity."
+    },
+    {
+        "id": "003",
+        "date": "20260123",
+        "arrival_time": "09:10",
+        "departure_time": "15:35",
+        "weight_kg": 11.28,
+        "sleep": 2.2,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "mango"
+        ],
+        "behavior": [
+            "reserved",
+            "independent"
+        ],
+        "activity": [
+            "solo puzzle"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad chose to work alone on a complex puzzle. He rotated pieces slowly, verbalizing softly to himself, showing internal planning and independence."
+    },
+    {
+        "id": "003",
+        "date": "20260124",
+        "arrival_time": "08:20",
+        "departure_time": "17:00",
+        "weight_kg": 11.29,
+        "sleep": 3.0,
+        "appetite": "wanted seconds",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "leader",
+            "expressive"
+        ],
+        "activity": [
+            "dramatic play"
+        ],
+        "stool_count": 2,
+        "stool_state": "soft",
+        "observations_parent": "Slept very well.",
+        "observations_professional": "Iyad structured dramatic play with a clear beginning and end. He assigned roles thoughtfully and adjusted the storyline when others joined, showing narrative flexibility and social leadership."
+    },
+    {
+        "id": "003",
+        "date": "20260125",
+        "arrival_time": "08:55",
+        "departure_time": "16:15",
+        "weight_kg": 11.29,
+        "sleep": 2.4,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "pasta",
+            "carrots",
+            "apple"
+        ],
+        "behavior": [
+            "calm",
+            "reflective"
+        ],
+        "activity": [
+            "painting"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad explored paint texture and pressure, layering colors slowly. He paused to observe changes, showing pleasure in the process rather than the outcome."
+    },
+    {
+        "id": "003",
+        "date": "20260126",
+        "arrival_time": "08:30",
+        "departure_time": "16:50",
+        "weight_kg": 11.29,
+        "sleep": 1.7,
+        "appetite": "ate little",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "banana"
+        ],
+        "behavior": [
+            "fatigued",
+            "seeking calm"
+        ],
+        "activity": [
+            "cushion corner"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Late bedtime.",
+        "observations_professional": "Iyad chose the cushion corner and remained there for extended periods. This intentional withdrawal supported his need for calm and allowed gradual re-engagement later in the day."
+    },
+    {
+        "id": "003",
+        "date": "20260127",
+        "arrival_time": "08:10",
+        "departure_time": "17:15",
+        "weight_kg": 11.3,
+        "sleep": 3.2,
+        "appetite": "wanted seconds",
+        "food": [
+            "lentils",
+            "rice",
+            "carrots",
+            "yogurt"
+        ],
+        "behavior": [
+            "energetic",
+            "joyful"
+        ],
+        "activity": [
+            "outdoor climbing"
+        ],
+        "stool_count": 2,
+        "stool_state": "normal",
+        "observations_parent": "Great sleep.",
+        "observations_professional": "Iyad climbed with confidence, testing his limits while remaining attentive to his body. He repeated movements to refine coordination, expressing visible joy in mastering physical challenges."
+    },
+    {
+        "id": "003",
+        "date": "20260128",
+        "arrival_time": "09:00",
+        "departure_time": "15:50",
+        "weight_kg": 11.3,
+        "sleep": 2.3,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "pasta",
+            "carrots",
+            "pear"
+        ],
+        "behavior": [
+            "attentive",
+            "empathetic"
+        ],
+        "activity": [
+            "group discussion"
+        ],
+        "stool_count": 1,
+        "stool_state": "soft",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad listened carefully during group discussion and waited for his turn to speak. He acknowledged others\u2019 ideas before adding his own, showing growing social awareness and respect for group rhythm."
+    },
+    {
+        "id": "003",
+        "date": "20260129",
+        "arrival_time": "08:40",
+        "departure_time": "16:30",
+        "weight_kg": 11.3,
+        "sleep": 2.5,
+        "appetite": "ate all",
+        "food": [
+            "lentils",
+            "rice",
+            "yogurt",
+            "apple"
+        ],
+        "behavior": [
+            "focused",
+            "independent"
+        ],
+        "activity": [
+            "fine motor trays"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad engaged deeply with fine motor trays, using tweezers to transfer small objects. He adjusted finger tension precisely, supporting dexterity and concentration."
+    },
+    {
+        "id": "003",
+        "date": "20260130",
+        "arrival_time": "08:20",
+        "departure_time": "17:00",
+        "weight_kg": 11.31,
+        "sleep": 1.6,
+        "appetite": "picky",
+        "food": [
+            "rice",
+            "carrots",
+            "yogurt",
+            "mango"
+        ],
+        "behavior": [
+            "sensitive",
+            "persevering"
+        ],
+        "activity": [
+            "drawing patterns"
+        ],
+        "stool_count": 0,
+        "stool_state": "none",
+        "observations_parent": "Short night.",
+        "observations_professional": "Despite fatigue, Iyad remained engaged in drawing repetitive patterns. This rhythmic activity appeared to help him maintain emotional balance and complete the morning calmly."
+    },
+    {
+        "id": "003",
+        "date": "20260131",
+        "arrival_time": "08:35",
+        "departure_time": "16:45",
+        "weight_kg": 11.31,
+        "sleep": 2.9,
+        "appetite": "ate all",
+        "food": [
+            "fish",
+            "rice",
+            "carrots",
+            "banana"
+        ],
+        "behavior": [
+            "content",
+            "secure"
+        ],
+        "activity": [
+            "free choice play"
+        ],
+        "stool_count": 1,
+        "stool_state": "normal",
+        "observations_parent": "All good.",
+        "observations_professional": "Iyad navigated free-choice play with confidence, moving fluidly between activities. He demonstrated emotional security and autonomy, closing the month with a balanced and engaged presence."
+    }
+]
