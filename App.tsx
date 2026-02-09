@@ -6,6 +6,7 @@ import AuthScreen from './screens/AuthScreen';
 import ObservationScreen from './screens/PulseScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import MagicScreen from './screens/MagicScreen';
+import ShowcaseScreen from './screens/ShowcaseScreen';
 
 const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('auth');
@@ -14,13 +15,11 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const checkKey = async () => {
-      // Use cast to any to avoid type conflict with existing window.aistudio definition in the environment
       const win = window as any;
       if (win.aistudio && win.aistudio.hasSelectedApiKey) {
         const has = await win.aistudio.hasSelectedApiKey();
         setHasApiKey(has);
       } else {
-        // Fallback for environments where aistudio object is not available
         setHasApiKey(true);
       }
     };
@@ -31,7 +30,6 @@ const App: React.FC = () => {
     const win = window as any;
     if (win.aistudio) {
       await win.aistudio.openSelectKey();
-      // Assume success to handle race condition as per instructions
       setHasApiKey(true);
     }
   };
@@ -39,13 +37,15 @@ const App: React.FC = () => {
   const renderScreen = () => {
     switch (currentScreen) {
       case 'auth':
-        return <AuthScreen onLogin={() => setCurrentScreen('observations')} />;
+        return <AuthScreen onLogin={() => setCurrentScreen('observations')} onViewShowcase={() => setCurrentScreen('showcase')} />;
       case 'observations':
         return <ObservationScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
       case 'dashboard':
         return <DashboardScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
       case 'storybook':
         return <MagicScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
+      case 'showcase':
+        return <ShowcaseScreen onBack={() => setCurrentScreen('auth')} />;
       default:
         return <ObservationScreen selectedChild={selectedChild} setSelectedChild={setSelectedChild} onNavigate={setCurrentScreen} />;
     }
@@ -59,6 +59,10 @@ const App: React.FC = () => {
       default: return '';
     }
   };
+
+  if (currentScreen === 'showcase') {
+    return <ShowcaseScreen onBack={() => setCurrentScreen('auth')} />;
+  }
 
   if (!hasApiKey) {
     return (

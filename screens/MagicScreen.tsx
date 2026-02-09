@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Share2, RefreshCw, Heart, BookOpen, Quote, ChevronLeft, ChevronRight, Calendar, User, ClipboardList, FileText, Download } from 'lucide-react';
+import { Sparkles, Share2, RefreshCw, Heart, BookOpen, Quote, ChevronLeft, ChevronRight, Calendar, User, FileText, Download, Book, ChevronDown } from 'lucide-react';
 import { generateMonthlyStorybook, generateStoryImage } from '../services/geminiService';
 import { StoryPage, Child, Screen, DailyLog } from '../types';
 import ChildSelector from '../components/ChildSelector';
@@ -20,12 +20,14 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
   const [loadingStep, setLoadingStep] = useState('');
   const [logs, setLogs] = useState<DailyLog[]>([]);
 
+  // Restricted list for now as per data availability instructions
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   useEffect(() => {
     const loadLogs = async () => {
       if (selectedChild) {
-        const data = await fetchChildLogs(selectedChild, selectedMonth);
+        // Fetch logs for the selected child. We currently only have January data.
+        const data = await fetchChildLogs(selectedChild, selectedMonth.toLowerCase());
         setLogs(data);
       }
     };
@@ -39,9 +41,8 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
     setLoadingStep('Reading 31 days of adventures...');
     
     try {
-      // Synthesize real observations for the prompt
       const realObservations = logs
-        .slice(0, 10) // Taking a sample of days to keep prompt efficient
+        .slice(0, 10)
         .map(l => `On day ${l.date}, ${l.observations_professional}`)
         .join(" ");
 
@@ -108,33 +109,41 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
 
       {selectedChild ? (
         <>
-          {/* Configuration Header */}
+          {/* Period Selector Header */}
           <section className="bg-white/80 backdrop-blur-xl p-6 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center space-x-4">
-              <div className="bg-indigo-100 p-3 rounded-2xl text-indigo-600">
+              <div className="bg-indigo-50 p-3 rounded-2xl text-indigo-500 shadow-inner">
                 <Calendar size={24} />
               </div>
               <div>
-                <h3 className="font-black text-slate-800 tracking-tight">Select Story Period</h3>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{logs.length} days of data found</p>
+                <h3 className="text-sm font-black text-slate-800 tracking-tight">Select Story Period</h3>
+                <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">{logs.length} DAYS OF DATA FOUND</p>
               </div>
             </div>
             
             <div className="flex items-center space-x-4 w-full md:w-auto">
-              <select 
-                value={selectedMonth}
-                onChange={(e) => setSelectedMonth(e.target.value)}
-                className="flex-1 md:w-48 bg-slate-100 border-none rounded-2xl px-6 py-3 font-bold text-slate-700 outline-none focus:ring-2 focus:ring-indigo-500 appearance-none"
-              >
-                {months.map(m => <option key={m} value={m}>{m}</option>)}
-              </select>
+              <div className="relative flex-1 md:w-48 group">
+                <select 
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 font-black text-slate-700 text-xs shadow-inner appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                >
+                  {months.map(m => (
+                    <option key={m} value={m} disabled={m !== 'January'}>
+                      {m} {m !== 'January' ? '(No Data)' : ''}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown size={14} className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+              </div>
+
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || logs.length === 0}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-2xl font-black shadow-lg shadow-indigo-100 transition-all disabled:opacity-50 flex items-center space-x-2"
+                className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-black shadow-lg shadow-indigo-100 transition-all disabled:opacity-50 flex items-center space-x-2 text-xs hover:scale-[1.02] active:scale-95"
               >
-                {isGenerating ? <RefreshCw className="animate-spin" size={18} /> : <Sparkles size={18} />}
-                <span>{pages.length > 0 ? 'Regenerate' : 'Generate From Logs'}</span>
+                {isGenerating ? <RefreshCw className="animate-spin" size={16} /> : <Sparkles size={16} />}
+                <span>Generate From Logs</span>
               </button>
             </div>
           </section>
@@ -143,8 +152,8 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
             <div className="rainbow-border rounded-[3.5rem] shadow-2xl overflow-hidden h-[600px] flex flex-col items-center justify-center bg-white space-y-8 p-12 text-center">
               <div className="relative">
                  <div className="w-32 h-32 border-8 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
-                 <div className="absolute inset-0 flex items-center justify-center">
-                    <BookOpen className="text-indigo-600 animate-pulse" size={40} />
+                 <div className="absolute inset-0 flex items-center justify-center text-indigo-600">
+                    <BookOpen size={40} className="animate-pulse" />
                  </div>
               </div>
               <div className="space-y-3">
@@ -178,21 +187,13 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
 
                   <div className="w-full md:w-1/2 p-10 md:p-14 flex flex-col justify-center relative bg-white">
                     <Quote className="absolute top-10 right-10 text-indigo-50 w-24 h-24 opacity-20" />
-                    
                     <div className="relative z-10 space-y-8">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <Calendar size={16} className="text-pink-400" />
-                        <span className="text-xs font-black text-pink-400 uppercase tracking-[0.2em]">{selectedMonth} Adventures</span>
-                      </div>
-                      
                       <p className="text-2xl font-bold text-slate-700 leading-relaxed italic font-serif">
                         "{activePage?.text}"
                       </p>
-                      
                       <div className="flex items-center space-x-4 pt-6">
-                        <img src={selectedChild.avatar} alt="" className="w-14 h-14 rounded-2xl border-4 border-white shadow-lg transform -rotate-6" />
+                        {/* Avatar removed as per request to only show name */}
                         <div className="text-left">
-                          <span className="block text-[10px] font-black text-indigo-600 uppercase tracking-widest">Explorer</span>
                           <span className="block text-lg font-black text-slate-800">{selectedChild.name}</span>
                         </div>
                       </div>
@@ -202,22 +203,14 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                       <button 
                         disabled={currentPage === 0}
                         onClick={() => setCurrentPage(p => p - 1)}
-                        className="p-4 rounded-2xl bg-slate-100 text-slate-400 hover:bg-indigo-100 hover:text-indigo-600 disabled:opacity-30 transition-all"
+                        className="p-4 rounded-2xl bg-slate-100 text-slate-400 hover:bg-indigo-100 hover:text-indigo-600 transition-all disabled:opacity-30"
                       >
                         <ChevronLeft size={24} />
                       </button>
-                      <div className="flex space-x-2">
-                        {[...Array(5)].map((_, i) => (
-                          <div 
-                            key={i} 
-                            className={`w-3 h-3 rounded-full transition-all ${i === currentPage ? 'bg-indigo-600 w-8' : 'bg-slate-200'}`}
-                          />
-                        ))}
-                      </div>
                       <button 
                         disabled={currentPage === 4}
                         onClick={() => setCurrentPage(p => p + 1)}
-                        className="p-4 rounded-2xl bg-slate-100 text-slate-400 hover:bg-indigo-100 hover:text-indigo-600 disabled:opacity-30 transition-all"
+                        className="p-4 rounded-2xl bg-slate-100 text-slate-400 hover:bg-indigo-100 hover:text-indigo-600 transition-all disabled:opacity-30"
                       >
                         <ChevronRight size={24} />
                       </button>
@@ -231,43 +224,34 @@ const StorybookScreen: React.FC<StorybookScreenProps> = ({ selectedChild, setSel
                   <Download className="group-hover:scale-110 transition-transform text-indigo-500" size={24} />
                   <span className="text-lg font-black">Download PDF Book</span>
                 </button>
-                <button className="flex-1 flex items-center justify-center space-x-4 py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[2.5rem] shadow-2xl shadow-indigo-100 transition-all transform hover:-translate-y-1 active:scale-95 group">
-                  <Share2 className="text-white group-hover:rotate-12 transition-transform" size={24} />
+                <button className="flex-1 flex items-center justify-center space-x-4 py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[2.5rem] shadow-2xl transition-all group">
+                  <Share2 size={24} />
                   <span className="text-lg font-black">Share Full Month Story</span>
                 </button>
               </div>
             </div>
           ) : (
-            <div className="bg-white/90 backdrop-blur rounded-[3rem] p-20 border-2 border-dashed border-indigo-100 flex flex-col items-center justify-center text-center space-y-6">
-               <div className="w-24 h-24 bg-indigo-50 rounded-[2rem] flex items-center justify-center text-indigo-300">
-                 <BookOpen size={48} />
+            /* Storybook Ready Section */
+            <div className="bg-white/40 backdrop-blur rounded-[3rem] p-20 border-2 border-dashed border-indigo-100 flex flex-col items-center justify-center text-center space-y-8 animate-in fade-in duration-500">
+               <div className="w-24 h-24 bg-indigo-50 rounded-[2.5rem] flex items-center justify-center text-indigo-400 shadow-inner">
+                 <Book size={48} />
                </div>
-               <div className="space-y-2">
-                 <h3 className="text-2xl font-black text-slate-800">{logs.length > 0 ? 'Storybook Ready' : 'Data Sync Required'}</h3>
-                 <p className="text-slate-500 font-bold">
-                   {logs.length > 0 
-                     ? `We found ${logs.length} days of data for ${selectedChild.name}. Ready to weave some magic?` 
-                     : `No logs found for ${selectedMonth}. Please select a month with recorded data.`
-                   }
+               <div className="space-y-3">
+                 <h3 className="text-3xl font-black text-slate-800 tracking-tight">Storybook Ready</h3>
+                 <p className="text-slate-500 font-bold max-w-md mx-auto leading-relaxed text-sm">
+                   We found {logs.length} days of data for {selectedChild.name}. Ready to weave some magic?
                  </p>
                </div>
                
-               <div className="space-y-8 w-full max-w-sm">
+               <div className="space-y-6 w-full max-w-sm">
                  <button 
                   disabled={logs.length === 0}
                   onClick={handleGenerate}
-                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 hover:scale-105 transition-all disabled:opacity-50 disabled:hover:scale-100"
+                  className="w-full py-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-[1.5rem] font-black shadow-2xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 text-base"
                  >
                   Generate {selectedMonth} Book
                  </button>
-
-                 <div className="relative group">
-                   <div className="absolute inset-0 bg-indigo-50 rounded-2xl border-2 border-dashed border-indigo-200 group-hover:border-indigo-400 transition-colors" />
-                   <button className="relative w-full py-6 flex flex-col items-center justify-center space-y-2 text-indigo-400 group-hover:text-indigo-600 transition-colors">
-                     <FileText size={24} />
-                     <span className="text-xs font-black uppercase tracking-[0.2em]">Archived Reports</span>
-                   </button>
-                 </div>
+                 {/* Archived Reports removed as per request to simplify the view */}
                </div>
             </div>
           )}

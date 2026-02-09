@@ -1,4 +1,3 @@
-
 export interface Child {
   id: string;
   name: string;
@@ -37,4 +36,4 @@ export interface Storybook {
   pages: StoryPage[];
 }
 
-export type Screen = 'auth' | 'observations' | 'dashboard' | 'storybook';
+export type Screen = 'auth' | 'observations' | 'dashboard' | 'storybook' | 'showcase';

@@ -1,13 +1,13 @@
-
 import React, { useState } from 'react';
-import { Mail, Lock, ShieldCheck } from 'lucide-react';
+import { Mail, Lock, ShieldCheck, Palette } from 'lucide-react';
 import { APP_LOGO } from '../constants';
 
 interface AuthScreenProps {
   onLogin: () => void;
+  onViewShowcase: () => void;
 }
 
-const AuthScreen: React.FC<AuthScreenProps> = ({ onLogin }) => {
+const AuthScreen: React.FC<AuthScreenProps> = ({ onLogin, onViewShowcase }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -55,6 +55,14 @@ const AuthScreen: React.FC<AuthScreenProps> = ({ onLogin }) => {
               <ShieldCheck size={16} />
               <span className="text-[10px] uppercase tracking-widest font-black">Authorized Personnel Only</span>
             </div>
+            
+            <button 
+              onClick={onViewShowcase}
+              className="flex items-center space-x-2 text-indigo-400 hover:text-indigo-600 font-black text-[10px] uppercase tracking-widest transition-colors mt-4 group"
+            >
+              <Palette size={14} className="group-hover:rotate-12 transition-transform" />
+              <span>View Design Showcase</span>
+            </button>
           </div>
         </div>
       </div>
